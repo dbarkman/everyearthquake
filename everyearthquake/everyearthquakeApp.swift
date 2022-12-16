@@ -11,7 +11,7 @@ import SwiftUI
 struct everyearthquakeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            QuakeList()
         }
     }
 }

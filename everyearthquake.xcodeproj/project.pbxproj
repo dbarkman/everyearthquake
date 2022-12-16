@@ -8,17 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		63DF40BA294C09BF00DC037E /* everyearthquakeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40B9294C09BF00DC037E /* everyearthquakeApp.swift */; };
-		63DF40BC294C09BF00DC037E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40BB294C09BF00DC037E /* ContentView.swift */; };
+		63DF40BC294C09BF00DC037E /* QuakeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40BB294C09BF00DC037E /* QuakeList.swift */; };
 		63DF40BE294C09C000DC037E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF40BD294C09C000DC037E /* Assets.xcassets */; };
 		63DF40C1294C09C000DC037E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF40C0294C09C000DC037E /* Preview Assets.xcassets */; };
+		63DF40C8294C24C100DC037E /* QuakeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40C7294C24C100DC037E /* QuakeListViewModel.swift */; };
+		63DF40CA294C279700DC037E /* Quake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40C9294C279700DC037E /* Quake.swift */; };
+		63DF40CC294C2DD100DC037E /* AsyncAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40CB294C2DD100DC037E /* AsyncAPI.swift */; };
+		63DF40CF294C2ED500DC037E /* apiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63DF40CE294C2ED500DC037E /* apiInfo.plist */; };
+		63DF40D1294C2FE500DC037E /* APIInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40D0294C2FE500DC037E /* APIInfo.swift */; };
+		63DF40D3294C318A00DC037E /* APISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40D2294C318A00DC037E /* APISettings.swift */; };
+		63DF40D5294C33F600DC037E /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40D4294C33F600DC037E /* Errors.swift */; };
+		63DF40D7294C371400DC037E /* EarthquakesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40D6294C371400DC037E /* EarthquakesResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		63DF40B6294C09BF00DC037E /* everyearthquake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = everyearthquake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DF40B9294C09BF00DC037E /* everyearthquakeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = everyearthquakeApp.swift; sourceTree = "<group>"; };
-		63DF40BB294C09BF00DC037E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		63DF40BB294C09BF00DC037E /* QuakeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuakeList.swift; sourceTree = "<group>"; };
 		63DF40BD294C09C000DC037E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63DF40C0294C09C000DC037E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		63DF40C7294C24C100DC037E /* QuakeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuakeListViewModel.swift; sourceTree = "<group>"; };
+		63DF40C9294C279700DC037E /* Quake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quake.swift; sourceTree = "<group>"; };
+		63DF40CB294C2DD100DC037E /* AsyncAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAPI.swift; sourceTree = "<group>"; };
+		63DF40CE294C2ED500DC037E /* apiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apiInfo.plist; sourceTree = "<group>"; };
+		63DF40D0294C2FE500DC037E /* APIInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInfo.swift; sourceTree = "<group>"; };
+		63DF40D2294C318A00DC037E /* APISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISettings.swift; sourceTree = "<group>"; };
+		63DF40D4294C33F600DC037E /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		63DF40D6294C371400DC037E /* EarthquakesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthquakesResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +68,14 @@
 			isa = PBXGroup;
 			children = (
 				63DF40B9294C09BF00DC037E /* everyearthquakeApp.swift */,
-				63DF40BB294C09BF00DC037E /* ContentView.swift */,
+				63DF40CD294C2E8C00DC037E /* APIInfo */,
+				63DF40D2294C318A00DC037E /* APISettings.swift */,
+				63DF40BB294C09BF00DC037E /* QuakeList.swift */,
+				63DF40C7294C24C100DC037E /* QuakeListViewModel.swift */,
+				63DF40C9294C279700DC037E /* Quake.swift */,
+				63DF40CB294C2DD100DC037E /* AsyncAPI.swift */,
+				63DF40D6294C371400DC037E /* EarthquakesResponse.swift */,
+				63DF40D4294C33F600DC037E /* Errors.swift */,
 				63DF40BD294C09C000DC037E /* Assets.xcassets */,
 				63DF40BF294C09C000DC037E /* Preview Content */,
 			);
@@ -65,6 +88,15 @@
 				63DF40C0294C09C000DC037E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		63DF40CD294C2E8C00DC037E /* APIInfo */ = {
+			isa = PBXGroup;
+			children = (
+				63DF40CE294C2ED500DC037E /* apiInfo.plist */,
+				63DF40D0294C2FE500DC037E /* APIInfo.swift */,
+			);
+			path = APIInfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +157,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63DF40CF294C2ED500DC037E /* apiInfo.plist in Resources */,
 				63DF40C1294C09C000DC037E /* Preview Assets.xcassets in Resources */,
 				63DF40BE294C09C000DC037E /* Assets.xcassets in Resources */,
 			);
@@ -137,7 +170,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63DF40BC294C09BF00DC037E /* ContentView.swift in Sources */,
+				63DF40D3294C318A00DC037E /* APISettings.swift in Sources */,
+				63DF40CC294C2DD100DC037E /* AsyncAPI.swift in Sources */,
+				63DF40C8294C24C100DC037E /* QuakeListViewModel.swift in Sources */,
+				63DF40D1294C2FE500DC037E /* APIInfo.swift in Sources */,
+				63DF40D5294C33F600DC037E /* Errors.swift in Sources */,
+				63DF40D7294C371400DC037E /* EarthquakesResponse.swift in Sources */,
+				63DF40CA294C279700DC037E /* Quake.swift in Sources */,
+				63DF40BC294C09BF00DC037E /* QuakeList.swift in Sources */,
 				63DF40BA294C09BF00DC037E /* everyearthquakeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,7 +235,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -249,7 +289,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -265,16 +305,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2022121501;
 				DEVELOPMENT_ASSET_PATHS = "\"everyearthquake/Preview Content\"";
 				DEVELOPMENT_TEAM = V66UJ72Z63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Earthquakes;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -294,16 +335,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2022121501;
 				DEVELOPMENT_ASSET_PATHS = "\"everyearthquake/Preview Content\"";
 				DEVELOPMENT_TEAM = V66UJ72Z63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Earthquakes;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
