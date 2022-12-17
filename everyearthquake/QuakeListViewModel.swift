@@ -16,19 +16,28 @@ class QuakeListViewModel: ObservableObject {
   
   private init() { }
 
-  @Published public var quakes: [Quake] = []
+  @Published public var quakes: [Day] = []
   
-  public func getQuakes() {
-    Task {
-      if let response = await AsyncAPI.shared.getQuakes() {
-        let newQuakes = response.quakes
-        DispatchQueue.main.async {
+  func getQuakes(start: Int, count: Int) async {
+    if let response = await AsyncAPI.shared.getQuakes(start: start, count: count) {
+      
+      DispatchQueue.main.async {
+        if start == 0 {
           self.quakes.removeAll()
-          self.quakes.append(contentsOf: newQuakes)
         }
-      } else {
-        logger.error("Couldn't get new quakes from AsyncAPI.")
+
+        for quake in response.quakes {
+          let sectionHeader = DateTime.shared.makeStringFromDate(date: quake.date, dateFormat: .full, timeFormat: .none)
+          if let sectionIndex = self.quakes.firstIndex(where: { $0.title == sectionHeader }) {
+            self.quakes[sectionIndex].quakes.append(quake)
+          } else {
+            let day = Day(title: sectionHeader, quakes: [quake], date: quake.date)
+            self.quakes.append(day)
+          }
+        }
       }
+    } else {
+      logger.error("Couldn't get new quakes from AsyncAPI.")
     }
   }
   

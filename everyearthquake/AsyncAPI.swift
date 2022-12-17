@@ -16,13 +16,16 @@ struct AsyncAPI {
   
   private init() { }
   
-  func getQuakes() async -> EarthquakesResponse? {
+  func getQuakes(start: Int, count: Int) async -> EarthquakesResponse? {
     let apiKey = APISettings.shared.fetchAPISettings().apiKey
     let urlBase = APISettings.shared.fetchAPISettings().urlBase
     let earthquakesEndpoint = APISettings.shared.fetchAPISettings().earthquakesEndpoint
     var decodedResponse: EarthquakesResponse?
     
-    let urlString = urlBase + earthquakesEndpoint + "?start=0&count=1000&key=" + apiKey
+    var urlString = urlBase + earthquakesEndpoint
+    urlString += "?start=\(start)"
+    urlString += "&count=\(count)"
+    urlString += "&key=" + apiKey
     logger.debug("URL: \(urlString)")
     guard let url = URL(string: urlString) else { return nil }
     var request = URLRequest(url: url)

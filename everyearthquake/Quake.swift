@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct Quake: Codable, Equatable, Hashable {
+struct Quake: Codable, Equatable, Hashable, Identifiable {
   var id: String
   var magnitude: String
   var type: String
   var title: String
-  var date: String
+  var date: Date
   var time: String
   var url: String
   var tsunami: String
@@ -27,7 +27,7 @@ struct Quake: Codable, Equatable, Hashable {
   var city: String
   var locality: String
   var postcode: String
-  var what3words: String
+  var what3words: String?
   var timezone: String
 
   enum CodingKeys: String, CodingKey {
