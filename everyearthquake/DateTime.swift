@@ -20,6 +20,14 @@ struct DateTime {
     dateFormatter.timeStyle = timeFormat
     return dateFormatter.string(from: localDate)
   }
+  
+  func makeDateFromString(date: String, format: String) -> Date {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = format
+    guard let date = dateFormatter.date(from: date) else { return Date() }
+    return date
+  }
+
 }
 
 extension Date {

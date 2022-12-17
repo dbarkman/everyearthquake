@@ -54,9 +54,10 @@ struct QuakeList: View {
           }
         }
       }
-      .listStyle(PlainListStyle())
+      .listStyle(.plain)
       .navigationDestination(for: Quake.self) { quake in
-        Text("Earthquake \(quake.place) Detail")
+        QuakeDetail(quake: quake)
+          .navigationTitle("M" + quake.magnitude + " - " + quake.location)
       }
       .navigationTitle("Every Earthquake")
       .task {

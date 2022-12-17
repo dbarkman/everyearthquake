@@ -26,7 +26,10 @@ class QuakeListViewModel: ObservableObject {
           self.quakes.removeAll()
         }
 
-        for quake in response.quakes {
+        for var quake in response.quakes {
+          if quake.country.hasSuffix(" (the)") {
+            quake.country = String(quake.country.dropLast(6))
+          }
           let sectionHeader = DateTime.shared.makeStringFromDate(date: quake.date, dateFormat: .full, timeFormat: .none)
           if let sectionIndex = self.quakes.firstIndex(where: { $0.title == sectionHeader }) {
             self.quakes[sectionIndex].quakes.append(quake)
