@@ -33,8 +33,9 @@ struct QuakeList: View {
                     Text(quake.magnitude)
                       .foregroundColor(Color.black)
                   }
-                  Text(quake.place)
+                  Text("\(Formatters.shared.format(distance: Double(quake.distanceKM) ?? 0, from: .kilometers)) \(quake.placeOnly)")
                     .lineLimit(2)
+//                  Text(quake.placeOnly)
                   Spacer()
                   Text(DateTime.shared.makeStringFromDate(date: quake.date, dateFormat: .none, timeFormat: .short))
                     .font(.caption)
@@ -57,7 +58,7 @@ struct QuakeList: View {
       .listStyle(.plain)
       .navigationDestination(for: Quake.self) { quake in
         QuakeDetail(quake: quake)
-          .navigationTitle("M" + quake.magnitude + " - " + quake.location)
+          .navigationTitle("M\(quake.magnitude) - \(quake.location)")
       }
       .navigationTitle("Every Earthquake")
       .task {

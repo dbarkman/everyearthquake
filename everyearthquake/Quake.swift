@@ -20,6 +20,8 @@ struct Quake: Codable, Equatable, Hashable, Identifiable {
   var latitude: String
   var longitude: String
   var place: String
+  var distanceKM: String
+  var placeOnly: String
   var location: String
   var continent: String
   var country: String
@@ -31,7 +33,7 @@ struct Quake: Codable, Equatable, Hashable, Identifiable {
   var timezone: String
 
   enum CodingKeys: String, CodingKey {
-    case id, magnitude, type, title, date, time, url, tsunami, depth, latitude, longitude, place, location, continent, country, subnational, city, locality, postcode, what3words, timezone
+    case id, magnitude, type, title, date, time, url, tsunami, depth, latitude, longitude, place, distanceKM, placeOnly, location, continent, country, subnational, city, locality, postcode, what3words, timezone
   }
 }
 

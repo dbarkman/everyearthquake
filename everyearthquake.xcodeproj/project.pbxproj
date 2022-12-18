@@ -24,6 +24,7 @@
 		63DF40E0294E1B0400DC037E /* QuakeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40DF294E1B0400DC037E /* QuakeDetail.swift */; };
 		63DF40E2294E2A7D00DC037E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40E1294E2A7D00DC037E /* MapView.swift */; };
 		63DF40E4294E342E00DC037E /* PointOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40E3294E342E00DC037E /* PointOfInterest.swift */; };
+		63DF40E8294F644F00DC037E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40E7294F644F00DC037E /* Formatters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		63DF40DF294E1B0400DC037E /* QuakeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuakeDetail.swift; sourceTree = "<group>"; };
 		63DF40E1294E2A7D00DC037E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		63DF40E3294E342E00DC037E /* PointOfInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfInterest.swift; sourceTree = "<group>"; };
+		63DF40E7294F644F00DC037E /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				63DF40D2294C318A00DC037E /* APISettings.swift */,
 				63DF40BB294C09BF00DC037E /* QuakeList.swift */,
 				63DF40DF294E1B0400DC037E /* QuakeDetail.swift */,
+				63DF40E7294F644F00DC037E /* Formatters.swift */,
 				63DF40DB294D810A00DC037E /* DateTime.swift */,
 				63DF40C7294C24C100DC037E /* QuakeListViewModel.swift */,
 				63DF40E1294E2A7D00DC037E /* MapView.swift */,
@@ -188,6 +191,7 @@
 				63DF40D3294C318A00DC037E /* APISettings.swift in Sources */,
 				63DF40CC294C2DD100DC037E /* AsyncAPI.swift in Sources */,
 				63DF40DC294D810A00DC037E /* DateTime.swift in Sources */,
+				63DF40E8294F644F00DC037E /* Formatters.swift in Sources */,
 				63DF40C8294C24C100DC037E /* QuakeListViewModel.swift in Sources */,
 				63DF40E2294E2A7D00DC037E /* MapView.swift in Sources */,
 				63DF40DE294D8E7D00DC037E /* Day.swift in Sources */,
