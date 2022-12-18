@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import Mixpanel
 
 struct QuakeDetail: View {
+  
+  @State private var showFeedback = false
   
   var quake: Quake
   
@@ -58,8 +61,27 @@ struct QuakeDetail: View {
         Link("More details at USGS.gov", destination: URL(string: quake.url)!)
           .font(.title)
           .foregroundColor(.blue)
-      }
+      } //end of List
       .listStyle(.plain)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          HStack(spacing: 2) {
+            Button(action: {
+              showFeedback.toggle()
+            }, label: {
+              Image(systemName: "megaphone.fill")
+                .symbolRenderingMode(.monochrome)
+            })
+          }
+        }
+      }
+      .sheet(isPresented: $showFeedback) {
+        FeedbackModal()
+      }
+      .onAppear() {
+        Mixpanel.mainInstance().track(event: "QuakeDetail View")
+      }
+      .navigationTitle("M\(quake.magnitude) - \(quake.location)")
     }
     .navigationBarTitleDisplayMode(.inline)
   }

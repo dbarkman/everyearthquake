@@ -25,6 +25,9 @@
 		63DF40E2294E2A7D00DC037E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40E1294E2A7D00DC037E /* MapView.swift */; };
 		63DF40E4294E342E00DC037E /* PointOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40E3294E342E00DC037E /* PointOfInterest.swift */; };
 		63DF40E8294F644F00DC037E /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40E7294F644F00DC037E /* Formatters.swift */; };
+		63DF40EB294F758E00DC037E /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 63DF40EA294F758E00DC037E /* Mixpanel */; };
+		63DF40ED294F75AC00DC037E /* FeedbackModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40EC294F75AC00DC037E /* FeedbackModal.swift */; };
+		63DF40EF294F760A00DC037E /* GlobalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40EE294F760A00DC037E /* GlobalViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,8 @@
 		63DF40E1294E2A7D00DC037E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		63DF40E3294E342E00DC037E /* PointOfInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfInterest.swift; sourceTree = "<group>"; };
 		63DF40E7294F644F00DC037E /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		63DF40EC294F75AC00DC037E /* FeedbackModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModal.swift; sourceTree = "<group>"; };
+		63DF40EE294F760A00DC037E /* GlobalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63DF40EB294F758E00DC037E /* Mixpanel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +102,8 @@
 				63DF40CD294C2E8C00DC037E /* APIInfo */,
 				63DF40BD294C09C000DC037E /* Assets.xcassets */,
 				63DF40BF294C09C000DC037E /* Preview Content */,
+				63DF40EC294F75AC00DC037E /* FeedbackModal.swift */,
+				63DF40EE294F760A00DC037E /* GlobalViewModel.swift */,
 			);
 			path = everyearthquake;
 			sourceTree = "<group>";
@@ -133,6 +141,9 @@
 			dependencies = (
 			);
 			name = everyearthquake;
+			packageProductDependencies = (
+				63DF40EA294F758E00DC037E /* Mixpanel */,
+			);
 			productName = everyearthquake;
 			productReference = 63DF40B6294C09BF00DC037E /* everyearthquake.app */;
 			productType = "com.apple.product-type.application";
@@ -161,6 +172,9 @@
 				Base,
 			);
 			mainGroup = 63DF40AD294C09BF00DC037E;
+			packageReferences = (
+				63DF40E9294F758E00DC037E /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
+			);
 			productRefGroup = 63DF40B7294C09BF00DC037E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -188,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63DF40ED294F75AC00DC037E /* FeedbackModal.swift in Sources */,
 				63DF40D3294C318A00DC037E /* APISettings.swift in Sources */,
 				63DF40CC294C2DD100DC037E /* AsyncAPI.swift in Sources */,
 				63DF40DC294D810A00DC037E /* DateTime.swift in Sources */,
@@ -200,6 +215,7 @@
 				63DF40D5294C33F600DC037E /* Errors.swift in Sources */,
 				63DF40D7294C371400DC037E /* EarthquakesResponse.swift in Sources */,
 				63DF40CA294C279700DC037E /* Quake.swift in Sources */,
+				63DF40EF294F760A00DC037E /* GlobalViewModel.swift in Sources */,
 				63DF40BC294C09BF00DC037E /* QuakeList.swift in Sources */,
 				63DF40E0294E1B0400DC037E /* QuakeDetail.swift in Sources */,
 				63DF40BA294C09BF00DC037E /* everyearthquakeApp.swift in Sources */,
@@ -405,6 +421,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		63DF40E9294F758E00DC037E /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		63DF40EA294F758E00DC037E /* Mixpanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63DF40E9294F758E00DC037E /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 63DF40AE294C09BF00DC037E /* Project object */;
 }

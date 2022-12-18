@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Mixpanel
 import OSLog
 
 struct QuakeList: View {
@@ -17,7 +18,8 @@ struct QuakeList: View {
   @State private var start = 0
   @State private var count = 100
   @State private var fetching = false
-  
+  @State private var showFeedback = false
+
   var body: some View {
     NavigationStack {
       List {
@@ -58,9 +60,22 @@ struct QuakeList: View {
       .listStyle(.plain)
       .navigationDestination(for: Quake.self) { quake in
         QuakeDetail(quake: quake)
-          .navigationTitle("M\(quake.magnitude) - \(quake.location)")
       }
-      .navigationTitle("Every Earthquake")
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          HStack(spacing: 2) {
+            Button(action: {
+              showFeedback.toggle()
+            }, label: {
+              Image(systemName: "megaphone.fill")
+                .symbolRenderingMode(.monochrome)
+            })
+          }
+        }
+      }
+      .sheet(isPresented: $showFeedback) {
+        FeedbackModal()
+      }
       .task {
         await quakeListViewModel.getQuakes(start: 0, count: count)
       }
@@ -68,6 +83,10 @@ struct QuakeList: View {
         start = 0
         await quakeListViewModel.getQuakes(start: 0, count: count)
       }
+      .onAppear() {
+        Mixpanel.mainInstance().track(event: "QuakeList View")
+      }
+      .navigationTitle("Every Earthquake")
     }
   }
 }
