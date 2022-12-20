@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Mixpanel
 import OSLog
 
 class QuakeListViewModel: ObservableObject {
@@ -36,10 +37,18 @@ class QuakeListViewModel: ObservableObject {
     let selectedMagnitude = magDict[magnitude] ?? "0"
     let selectedType = self.type == "All Types" ? "" : self.type
     
+    if selectedMagnitude != "0" {
+      Mixpanel.mainInstance().track(event: "Filtering Events by Magnitude", properties: ["magnitude": selectedMagnitude])
+    }
+    if type != "All Types" {
+      Mixpanel.mainInstance().track(event: "Filtering Events by Type", properties: ["type": type])
+    }
+    
     if UserDefaults.standard.bool(forKey: "filterEventsByLocation") {
       location = await Location.getLocation()
       radius = UserDefaults.standard.string(forKey: "radiusSelected") ?? "1000"
       units = UserDefaults.standard.integer(forKey: "unitsSelected") == 0 ? "miles" : "kilometers"
+      Mixpanel.mainInstance().track(event: "Filtering Events distance by \(units)", properties: ["radius": radius])
     } else {
       location = ""
     }

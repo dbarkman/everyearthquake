@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Mixpanel
 
 struct QuakeListFiltersModal: View {
   
@@ -37,6 +38,17 @@ struct QuakeListFiltersModal: View {
     NavigationStack {
       List {
         Section(header: Text("Event Details"), footer: Text("Over 4.2 million events available")) {
+          if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || filterEventsByLocation != 0 {
+            Button(action: {
+              quakeListViewModel.magnitude = "All Magnitudes"
+              quakeListViewModel.type = "All Types"
+              filterEventsByLocation = 0
+              updateLocation()
+            }) {
+              Text("Reset Filters")
+                .foregroundColor(Color.red)
+            }
+          }
           Picker("Event magnitude", selection: $quakeListViewModel.magnitude) {
             ForEach(magnitudes, id: \.self) {
               Text($0)
@@ -159,6 +171,7 @@ struct QuakeListFiltersModal: View {
         }
       }
       .onAppear {
+        Mixpanel.mainInstance().track(event: "QuakeListFilters View")
         let filterEventsByLocation = UserDefaults.standard.bool(forKey: "filterEventsByLocation")
         self.filterEventsByLocation = filterEventsByLocation ? 1 : 0
         if filterEventsByLocation {
@@ -179,6 +192,7 @@ struct QuakeListFiltersModal: View {
   
   private func updateLocation() {
     if filterEventsByLocation == 1 {
+      Mixpanel.mainInstance().track(event: "Filtering Events by Location")
       UserDefaults.standard.set(true, forKey: "filterEventsByLocation")
       if automaticLocation == 0 {
         if locationViewModel.authorizationStatus != .authorizedWhenInUse && locationViewModel.authorizationStatus != .authorizedAlways {

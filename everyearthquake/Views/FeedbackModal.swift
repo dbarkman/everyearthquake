@@ -61,7 +61,6 @@ struct FeedbackModal: View {
             HStack {
               Text("Send")
                 .font(.title2)
-                .foregroundColor(Color("AccentColor"))
                 .onTapGesture {
                   withAnimation() {
                     sendFeedback()
@@ -70,7 +69,6 @@ struct FeedbackModal: View {
               Spacer()
               Text("ver")
                 .font(.title2)
-                .foregroundColor(Color("ListBackground"))
                 .onTapGesture {
                   withAnimation() {
                     showVersion.toggle()
@@ -82,7 +80,6 @@ struct FeedbackModal: View {
             Text(currentVersion)
           }
         } //end of Section
-//        .listRowBackground(Color("ListBackground"))
       } //end of list
       .listStyle(.plain)
       .toolbar {
@@ -103,18 +100,12 @@ struct FeedbackModal: View {
       }
       .navigationTitle("Feedback")
       .onAppear() {
-//        let appearance = UINavigationBarAppearance()
-//        appearance.backgroundColor = UIColor(Color("NavigationBackground"))//.opacity(0.9))
-//        UINavigationBar.appearance().standardAppearance = appearance
-//        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-//        UINavigationBar.appearance().tintColor = UIColor(Color("AccentColor"))
         Mixpanel.mainInstance().track(event: "Feedback View")
         let appVersion = globalViewModel.fetchAppVersionNumber()
         let buildNumber = globalViewModel.fetchBuildNumber()
         currentVersion = "\(appVersion)-\(buildNumber)"
       }
     }
-//    .accentColor(Color("AccentColor"))
   }
   
   private func sendFeedback() {

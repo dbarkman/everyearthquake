@@ -13,6 +13,8 @@ struct QuakeList: View {
   
   let logger = Logger(subsystem: "com.dbarkman.everyearthquake", category: "QuakeList")
   
+  @Environment(\.scenePhase) var scenePhase
+  
   @StateObject private var quakeListViewModel = QuakeListViewModel.shared
   
   @State private var showFilters = false
@@ -94,15 +96,24 @@ struct QuakeList: View {
       .sheet(isPresented: $showFeedback) {
         FeedbackModal()
       }
-      .task {
-        await quakeListViewModel.getQuakes(start: 0, count: quakeListViewModel.count)
-      }
       .refreshable {
         quakeListViewModel.start = 0
         await quakeListViewModel.getQuakes(start: quakeListViewModel.start, count: quakeListViewModel.count)
       }
       .onAppear() {
         Mixpanel.mainInstance().track(event: "QuakeList View")
+      }
+      .onChange(of: scenePhase) { newPhase in
+        if newPhase == .active {
+          logger.debug("active")
+          Task {
+            await quakeListViewModel.getQuakes(start: 0, count: quakeListViewModel.count)
+          }
+        } else if newPhase == .inactive {
+          logger.debug("inactive")
+        } else if newPhase == .background {
+          logger.debug("background")
+        }
       }
       .navigationTitle("Every Earthquake")
     }// end of NavigationStack
