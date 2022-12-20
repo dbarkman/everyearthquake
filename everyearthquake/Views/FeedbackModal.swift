@@ -19,6 +19,8 @@ struct FeedbackModal: View {
   @State private var showVersion = false
   @State private var currentVersion = ""
   
+  @FocusState private var isFocused: Bool
+  
   var body: some View {
     NavigationView {
       List {
@@ -31,6 +33,7 @@ struct FeedbackModal: View {
             TextField("optional", text: $email)
               .textFieldStyle(RoundedBorderTextFieldStyle())
               .keyboardType(.emailAddress)
+              .focused($isFocused)
               .disableAutocorrection(true)
               .autocapitalization(.none)
               .cornerRadius(5)
@@ -42,8 +45,10 @@ struct FeedbackModal: View {
           VStack(alignment: .leading) {
             Text("Feedback:")
               .lineLimit(2)
+              .focused($isFocused)
             TextEditor(text: $feedback)
               .disabled(feedback.count >= (512))
+              .focused($isFocused)
               .background(.gray)
               .cornerRadius(5)
               .environment(\.colorScheme, .light)
@@ -57,27 +62,29 @@ struct FeedbackModal: View {
             Text("Any information you provide here will only be used to support the development of this app. Provided information will never be sold or given to a third party. 🤙 Pinky promise!")
               .font(.footnote)
           }
-          VStack(alignment: .leading) {
-            HStack {
-              Text("Send")
-                .font(.title2)
-                .onTapGesture {
-                  withAnimation() {
-                    sendFeedback()
-                  }
+          HStack {
+            Text("Send")
+              .font(.title2)
+              .foregroundColor(Color.blue)
+              .onTapGesture {
+                withAnimation() {
+                  sendFeedback()
                 }
-              Spacer()
-              Text("ver")
-                .font(.title2)
-                .onTapGesture {
-                  withAnimation() {
-                    showVersion.toggle()
-                  }
+              }
+            Spacer()
+            Text("ver")
+              .font(.title2)
+              .foregroundColor(Color.clear)
+              .onTapGesture {
+                withAnimation() {
+                  showVersion.toggle()
                 }
-            }
+              }
           }
+          .listRowSeparator(.hidden)
           if showVersion {
             Text(currentVersion)
+              .listRowSeparator(.hidden)
           }
         } //end of Section
       } //end of list
@@ -95,6 +102,12 @@ struct FeedbackModal: View {
             sendFeedback()
           }) {
             Text("Send")
+          }
+        }
+        ToolbarItemGroup(placement: .keyboard) {
+          Spacer()
+          Button("Done") {
+            isFocused = false
           }
         }
       }
