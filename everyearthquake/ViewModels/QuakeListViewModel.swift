@@ -23,6 +23,7 @@ class QuakeListViewModel: ObservableObject {
   @Published public var quakes: [Day] = []
   @Published public var magnitude: String = "All Magnitudes"
   @Published public var type: String = "All Types"
+  @Published public var filterEventsByLocation = false
 
   private var location = ""
   private var radius = ""
@@ -45,6 +46,9 @@ class QuakeListViewModel: ObservableObject {
     }
     
     if UserDefaults.standard.bool(forKey: "filterEventsByLocation") {
+      DispatchQueue.main.async {
+        self.filterEventsByLocation = true
+      }
       location = await Location.getLocation()
       radius = UserDefaults.standard.string(forKey: "radiusSelected") ?? "1000"
       units = UserDefaults.standard.integer(forKey: "unitsSelected") == 0 ? "miles" : "kilometers"

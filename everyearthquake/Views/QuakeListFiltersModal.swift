@@ -42,6 +42,7 @@ struct QuakeListFiltersModal: View {
             Button(action: {
               quakeListViewModel.magnitude = "All Magnitudes"
               quakeListViewModel.type = "All Types"
+              quakeListViewModel.filterEventsByLocation = false
               filterEventsByLocation = 0
               updateLocation()
             }) {

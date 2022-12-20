@@ -19,8 +19,9 @@ struct QuakeList: View {
   
   @State private var showFilters = false
   @State private var showFeedback = false
+  @State private var showNotificationSettings = false
   @State var refreshLocation: Bool = false
-
+  
   var body: some View {
     NavigationStack {
       ZStack {
@@ -69,26 +70,38 @@ struct QuakeList: View {
       }// end of ZStack
       .overlay(quakeListViewModel.quakes.isEmpty && !quakeListViewModel.fetching ? Text("     no events to show\rtry changning the filters") : nil, alignment: .center)
       .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button(action: {
+            showNotificationSettings = true
+          }, label: {
+            Image(systemName: "line.3.horizontal")
+              .symbolRenderingMode(.monochrome)
+          })
+        }
         ToolbarItem(placement: .navigationBarTrailing) {
-          HStack(spacing: 2) {
-            Button(action: {
-              showFilters = true
-            }, label: {
+          Button(action: {
+            showFilters = true
+          }, label: {
+            if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || quakeListViewModel.filterEventsByLocation {
               Image(systemName: "line.3.horizontal.decrease.circle.fill")
                 .symbolRenderingMode(.monochrome)
-            })
-          }
+            } else {
+              Image(systemName: "line.3.horizontal.decrease.circle")
+                .symbolRenderingMode(.monochrome)
+            }
+          })
         }
         ToolbarItem(placement: .navigationBarTrailing) {
-          HStack(spacing: 2) {
-            Button(action: {
-              showFeedback = true
-            }, label: {
-              Image(systemName: "megaphone.fill")
-                .symbolRenderingMode(.monochrome)
-            })
-          }
+          Button(action: {
+            showFeedback = true
+          }, label: {
+            Image(systemName: "megaphone.fill")
+              .symbolRenderingMode(.monochrome)
+          })
         }
+      }
+      .sheet(isPresented: $showNotificationSettings) {
+        NotificationSettingsModal()
       }
       .sheet(isPresented: $showFilters) {
         QuakeListFiltersModal(refreshLocation: $refreshLocation)

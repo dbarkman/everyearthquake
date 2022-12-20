@@ -32,6 +32,7 @@
 		63DF40F7295021D900DC037E /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40F6295021D900DC037E /* LocationViewModel.swift */; };
 		63DF40F92950221300DC037E /* Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40F82950221300DC037E /* Messaging.swift */; };
 		63DF40FD29502EEC00DC037E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40FC29502EEC00DC037E /* Location.swift */; };
+		63DF414B295261FC00DC037E /* NotificationSettingsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF414A295261FC00DC037E /* NotificationSettingsModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		63DF40F6295021D900DC037E /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		63DF40F82950221300DC037E /* Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messaging.swift; sourceTree = "<group>"; };
 		63DF40FC29502EEC00DC037E /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		63DF414A295261FC00DC037E /* NotificationSettingsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				63DF40EC294F75AC00DC037E /* FeedbackModal.swift */,
+				63DF414A295261FC00DC037E /* NotificationSettingsModal.swift */,
 				63DF40F4294FBF4100DC037E /* QuakeListFiltersModal.swift */,
 				63DF40E1294E2A7D00DC037E /* MapView.swift */,
 				63DF40DF294E1B0400DC037E /* QuakeDetail.swift */,
@@ -263,6 +266,7 @@
 				63DF40D7294C371400DC037E /* EarthquakesResponse.swift in Sources */,
 				63DF40CA294C279700DC037E /* Quake.swift in Sources */,
 				63DF40EF294F760A00DC037E /* GlobalViewModel.swift in Sources */,
+				63DF414B295261FC00DC037E /* NotificationSettingsModal.swift in Sources */,
 				63DF40BC294C09BF00DC037E /* QuakeList.swift in Sources */,
 				63DF40F5294FBF4100DC037E /* QuakeListFiltersModal.swift in Sources */,
 				63DF40E0294E1B0400DC037E /* QuakeDetail.swift in Sources */,
