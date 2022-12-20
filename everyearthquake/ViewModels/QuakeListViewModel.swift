@@ -21,7 +21,7 @@ class QuakeListViewModel: ObservableObject {
   @Published public var fetching = false
   @Published public var quakes: [Day] = []
   @Published public var magnitude: String = "All Magnitudes"
-  @Published public var type: String = ""
+  @Published public var type: String = "All Types"
 
   private var location = ""
   private var radius = ""
