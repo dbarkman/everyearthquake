@@ -67,7 +67,7 @@ struct QuakeDetail: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           HStack(spacing: 2) {
             Button(action: {
-              showFeedback.toggle()
+              showFeedback = true
             }, label: {
               Image(systemName: "megaphone.fill")
                 .symbolRenderingMode(.monochrome)
