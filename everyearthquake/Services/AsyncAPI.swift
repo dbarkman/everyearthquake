@@ -26,7 +26,7 @@ struct AsyncAPI {
     earthquakesEndpoint = APISettings.shared.fetchAPISettings().earthquakesEndpoint
   }
   
-  func saveToken(token: String, debug: Bool) async {
+  func saveToken(token: String, debug: Int) async {
     var urlString = urlBase + tokenEndpoint
     urlString += "?key=" + apiKey
     guard let url = URL(string: urlString) else { return }

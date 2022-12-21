@@ -30,9 +30,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     let token = deviceToken.reduce("") { $0 + String(format: "%02x", $1) }
     logger.debug("APNs token: \(token)")
 
-    var debug = false
+    var debug = 0
     #if DEBUG
-      debug = true
+      debug = 1
     #endif
     
     Task {
