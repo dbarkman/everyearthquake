@@ -11,6 +11,8 @@ import Mixpanel
 @main
 struct everyearthquakeApp: App {
   
+  @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+
   init() {
     Mixpanel.initialize(token: "71bea55cd83ac3de3ae7a742c307d4b5", trackAutomaticEvents: true)
   }

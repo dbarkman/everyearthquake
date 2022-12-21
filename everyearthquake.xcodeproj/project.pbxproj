@@ -33,6 +33,7 @@
 		63DF40F92950221300DC037E /* Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40F82950221300DC037E /* Messaging.swift */; };
 		63DF40FD29502EEC00DC037E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40FC29502EEC00DC037E /* Location.swift */; };
 		63DF414B295261FC00DC037E /* NotificationSettingsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF414A295261FC00DC037E /* NotificationSettingsModal.swift */; };
+		63DF414E2952708D00DC037E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF414D2952708D00DC037E /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,8 @@
 		63DF40F82950221300DC037E /* Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messaging.swift; sourceTree = "<group>"; };
 		63DF40FC29502EEC00DC037E /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		63DF414A295261FC00DC037E /* NotificationSettingsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsModal.swift; sourceTree = "<group>"; };
+		63DF414C29526F4E00DC037E /* everyearthquake.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = everyearthquake.entitlements; sourceTree = "<group>"; };
+		63DF414D2952708D00DC037E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +98,9 @@
 		63DF40B8294C09BF00DC037E /* everyearthquake */ = {
 			isa = PBXGroup;
 			children = (
+				63DF414C29526F4E00DC037E /* everyearthquake.entitlements */,
 				63DF40B9294C09BF00DC037E /* everyearthquakeApp.swift */,
+				63DF414D2952708D00DC037E /* AppDelegate.swift */,
 				63DF40F3294FBE8300DC037E /* Views */,
 				63DF40F2294FBE6600DC037E /* ViewModels */,
 				63DF40F1294FBE5800DC037E /* Models */,
@@ -271,6 +276,7 @@
 				63DF40F5294FBF4100DC037E /* QuakeListFiltersModal.swift in Sources */,
 				63DF40E0294E1B0400DC037E /* QuakeDetail.swift in Sources */,
 				63DF40BA294C09BF00DC037E /* everyearthquakeApp.swift in Sources */,
+				63DF414E2952708D00DC037E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,13 +402,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = everyearthquake/everyearthquake.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2022121501;
+				CURRENT_PROJECT_VERSION = 2022122003;
 				DEVELOPMENT_ASSET_PATHS = "\"everyearthquake/Preview Content\"";
 				DEVELOPMENT_TEAM = V66UJ72Z63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Every Earthquake";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location needed in order to search for earthquakes based on your lcoation.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location needed in order to search for earthquakes based on your lcoation.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -431,13 +439,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = everyearthquake/everyearthquake.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2022121501;
+				CURRENT_PROJECT_VERSION = 2022122003;
 				DEVELOPMENT_ASSET_PATHS = "\"everyearthquake/Preview Content\"";
 				DEVELOPMENT_TEAM = V66UJ72Z63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Every Earthquake";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location needed in order to search for earthquakes based on your lcoation.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location needed in order to search for earthquakes based on your lcoation.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

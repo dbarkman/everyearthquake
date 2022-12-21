@@ -14,12 +14,41 @@ struct AsyncAPI {
   
   static let shared = AsyncAPI()
   
-  private init() { }
+  var apiKey: String
+  var urlBase: String
+  var tokenEndpoint: String
+  var earthquakesEndpoint: String
+  
+  private init() {
+    apiKey = APISettings.shared.fetchAPISettings().apiKey
+    urlBase = APISettings.shared.fetchAPISettings().urlBase
+    tokenEndpoint = APISettings.shared.fetchAPISettings().tokenEndpoint
+    earthquakesEndpoint = APISettings.shared.fetchAPISettings().earthquakesEndpoint
+  }
+  
+  func saveToken(token: String, debug: Bool) async {
+    var urlString = urlBase + tokenEndpoint
+    urlString += "?key=" + apiKey
+    guard let url = URL(string: urlString) else { return }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.httpBody = "token=\(token)&debug=\(debug)".data(using: String.Encoding.utf8)
+    
+    do {
+      let (_, response) = try await URLSession.shared.data(for: request)
+      if let httpResponse = response as? HTTPURLResponse {
+        if httpResponse.statusCode != 200 && httpResponse.statusCode != 201 {
+          logger.error("HTTP response was not 200 or 201 when saving token. 😭 Response code: \(httpResponse.statusCode), Response description: \(httpResponse.description)")
+        }
+      }
+    } catch {
+      logger.error("Failed to fetch data when fetching earthquakes. 😭 \(error.localizedDescription)")
+    }
+    return
+  }
   
   func getQuakes(start: Int, count: Int, magnitude: String, type: String, location: String, radius: String, units: String) async -> EarthquakesResponse? {
-    let apiKey = APISettings.shared.fetchAPISettings().apiKey
-    let urlBase = APISettings.shared.fetchAPISettings().urlBase
-    let earthquakesEndpoint = APISettings.shared.fetchAPISettings().earthquakesEndpoint
     var decodedResponse: EarthquakesResponse?
     
     var urlString = urlBase + earthquakesEndpoint
