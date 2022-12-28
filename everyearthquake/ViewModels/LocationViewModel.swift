@@ -32,14 +32,13 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     didSet {
       guard oldValue != authorizationStatus else { return }
       logger.debug("LocationManager authorizationStatus updated")
-      NotificationCenter.default.post(name: .locationUpdatedEvent, object: nil)
       if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse {
-        UserDefaults.standard.set(true, forKey: "automaticLocation")
+        UserDefaults.standard.set(true, forKey: "automaticLocationFilter")
       } else {
         Mixpanel.mainInstance().track(event: "Location Not Authorized")
-        UserDefaults.standard.set(false, forKey: "automaticLocation")
-        guard let _ = UserDefaults.standard.string(forKey: "manualLocationData") else {
-          UserDefaults.standard.set("&latitude=38.7998839&longitude=-123.0238556", forKey: "manualLocationData")
+        UserDefaults.standard.set(false, forKey: "automaticLocationFilter")
+        guard let _ = UserDefaults.standard.string(forKey: "manualLocationDataFilter") else {
+          UserDefaults.standard.set("&latitude=38.7998839&longitude=-123.0238556", forKey: "manualLocationDataFilter")
           return
         }
       }

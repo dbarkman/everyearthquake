@@ -27,13 +27,35 @@ struct AsyncAPI {
   }
   
   func saveToken(token: String, debug: Int) async {
+    
     var urlString = urlBase + tokenEndpoint
     urlString += "?key=" + apiKey
     guard let url = URL(string: urlString) else { return }
     
+    var httpBody = "token=\(token)&debug=\(debug)"
+    let sendPush = UserDefaults.standard.bool(forKey: "sendPush") == true ? 1 : 0
+    let magnitude = UserDefaults.standard.string(forKey: "notificationMagnitude") ?? "Magnitude 5 and greater"
+    let notificationMagnitude = QuakeListViewModel.shared.magDict[magnitude] ?? "5"
+    httpBody += "&sendPush=\(sendPush)&magnitude=\(notificationMagnitude)"
+    
+    if UserDefaults.standard.bool(forKey: "sendPushForLocation") {
+      var location = ""
+      if UserDefaults.standard.bool(forKey: "automaticLocationNotifications") {
+        location = await Location.getLocation(forToken: true)
+      } else {
+        location = UserDefaults.standard.string(forKey: "manualLocationDataNotifications") ?? "38.7998839,123.0238556"
+      }
+      guard let latitude = location.components(separatedBy: ",").first, let longitude = location.components(separatedBy: ",").last else { return }
+      let radius = UserDefaults.standard.string(forKey: "radiusSelectedNotifications") ?? "500"
+      let units = UserDefaults.standard.string(forKey: "unitsSelectedNotifications") ?? "miles"
+      httpBody += "&location=1&latitude=\(latitude)&longitude=\(longitude)&radius=\(radius)&units=\(units)"
+    }
+    
+    logger.debug("httpBody: \(httpBody)")
+
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
-    request.httpBody = "token=\(token)&debug=\(debug)".data(using: String.Encoding.utf8)
+    request.httpBody = httpBody.data(using: String.Encoding.utf8)
     
     do {
       let (_, response) = try await URLSession.shared.data(for: request)

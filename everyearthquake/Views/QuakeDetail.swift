@@ -10,6 +10,8 @@ import Mixpanel
 
 struct QuakeDetail: View {
   
+  @StateObject private var quakeListViewModel = QuakeListViewModel.shared
+  
   @State private var showFeedback = false
   
   var quake: Quake
@@ -84,7 +86,7 @@ struct QuakeDetail: View {
       .navigationTitle("M\(quake.magnitude) - \(quake.location)")
     }
     .navigationBarTitleDisplayMode(.inline)
-  }
+  } //end of body
 }
 
 struct QuakeDetail_Previews: PreviewProvider {

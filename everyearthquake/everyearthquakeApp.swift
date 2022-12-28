@@ -15,11 +15,14 @@ struct everyearthquakeApp: App {
 
   init() {
     Mixpanel.initialize(token: "71bea55cd83ac3de3ae7a742c307d4b5", trackAutomaticEvents: true)
+    if !UserDefaults.standard.bool(forKey: "notNewInstall") {
+      UserDefaults.standard.set(false, forKey: "sendPush")
+    }
   }
 
   var body: some Scene {
     WindowGroup {
-      QuakeList()
+      QuakeList(refresh: false)
     }
   }
 }

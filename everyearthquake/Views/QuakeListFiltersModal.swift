@@ -24,7 +24,6 @@ struct QuakeListFiltersModal: View {
   @State private var filterEventsByLocation = 0
   @State private var automaticLocation = 0
   @State private var units = 0
-  @State private var zipcode = ""
   @State private var latitude = ""
   @State private var longitude = ""
   @State private var radius = ""
@@ -106,6 +105,7 @@ struct QuakeListFiltersModal: View {
                   .environment(\.colorScheme, .light)
                   .keyboardType(.numbersAndPunctuation)
                   .focused($isFocused)
+                  .disableAutocorrection(true)
               }
               HStack {
                 Text("Longitude:")
@@ -114,6 +114,7 @@ struct QuakeListFiltersModal: View {
                   .environment(\.colorScheme, .light)
                   .keyboardType(.numbersAndPunctuation)
                   .focused($isFocused)
+                  .disableAutocorrection(true)
               }
             }
             
@@ -176,11 +177,11 @@ struct QuakeListFiltersModal: View {
         let filterEventsByLocation = UserDefaults.standard.bool(forKey: "filterEventsByLocation")
         self.filterEventsByLocation = filterEventsByLocation ? 1 : 0
         if filterEventsByLocation {
-          let automaticLocation = UserDefaults.standard.bool(forKey: "automaticLocation")
+          let automaticLocation = UserDefaults.standard.bool(forKey: "automaticLocationFilter")
           self.automaticLocation = automaticLocation ? 0 : 1
-          radius = UserDefaults.standard.string(forKey: "radiusSelected") ?? "25"
-          units = UserDefaults.standard.integer(forKey: "unitsSelected")
-          guard let manualLocationData = UserDefaults.standard.string(forKey: "manualLocationData") else { return }
+          radius = UserDefaults.standard.string(forKey: "radiusSelectedFilter") ?? "25"
+          units = UserDefaults.standard.integer(forKey: "unitsSelectedFilter")
+          guard let manualLocationData = UserDefaults.standard.string(forKey: "manualLocationDataFilter") else { return }
           if let latitude = manualLocationData.components(separatedBy: ",").first, let longitude = manualLocationData.components(separatedBy: ",").last {
             self.latitude = latitude
             self.longitude = longitude
@@ -200,22 +201,21 @@ struct QuakeListFiltersModal: View {
           updateLocationResult = "Location permission must be granted in order to use automatic location."
           return
         }
-        UserDefaults.standard.set(true, forKey: "automaticLocation")
+        UserDefaults.standard.set(true, forKey: "automaticLocationFilter")
       } else {
-        UserDefaults.standard.set(false, forKey: "automaticLocation")
+        UserDefaults.standard.set(false, forKey: "automaticLocationFilter")
         if latitude.isEmpty || longitude.isEmpty {
           updateLocationResult = "Both latitude and longitude must be entered."
           return
         }
-        UserDefaults.standard.set("\(latitude),\(longitude)", forKey: "manualLocationData")
+        UserDefaults.standard.set("\(latitude),\(longitude)", forKey: "manualLocationDataFilter")
       }
       if radius.isEmpty {
         updateLocationResult = "Please enter a search radius."
         return
       }
-      UserDefaults.standard.set(radius, forKey: "radiusSelected")
-      UserDefaults.standard.set(units, forKey: "unitsSelected")
-      NotificationCenter.default.post(name: .locationUpdatedEvent, object: nil)
+      UserDefaults.standard.set(radius, forKey: "radiusSelectedFilter")
+      UserDefaults.standard.set(units, forKey: "unitsSelectedFilter")
     } else {
       UserDefaults.standard.set(false, forKey: "filterEventsByLocation")
     }

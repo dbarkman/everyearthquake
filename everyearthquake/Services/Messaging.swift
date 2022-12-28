@@ -9,5 +9,5 @@ import Foundation
 
 extension Notification.Name {
   
-  static let locationUpdatedEvent = Notification.Name("locationUpdatedEvent")
+  static let notificationReceivedEvent = Notification.Name("notificationReceivedEvent")
 }

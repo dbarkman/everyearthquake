@@ -19,8 +19,12 @@ struct QuakeList: View {
   
   @State private var showFilters = false
   @State private var showFeedback = false
+  @State private var showNotificationAlert = true
   @State private var showNotificationSettings = false
+
   @State var refreshLocation: Bool = false
+  
+  public var refresh: Bool
   
   var body: some View {
     NavigationStack {
@@ -101,7 +105,7 @@ struct QuakeList: View {
         }
       }
       .sheet(isPresented: $showNotificationSettings) {
-        NotificationSettingsModal()
+        NotificationSettingsModal(magnitude: UserDefaults.standard.string(forKey: "notificationMagnitude") ?? "Magnitude 5 and greater")
       }
       .sheet(isPresented: $showFilters) {
         QuakeListFiltersModal(refreshLocation: $refreshLocation)
@@ -115,6 +119,11 @@ struct QuakeList: View {
       }
       .onAppear() {
         Mixpanel.mainInstance().track(event: "QuakeList View")
+        if refresh {
+          Task {
+            await quakeListViewModel.getQuakes(start: 0, count: quakeListViewModel.count)
+          }
+        }
       }
       .onChange(of: scenePhase) { newPhase in
         if newPhase == .active {
@@ -130,11 +139,11 @@ struct QuakeList: View {
       }
       .navigationTitle("Every Earthquake")
     }// end of NavigationStack
-  }
+  } //end of body
 }
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    QuakeList()
+    QuakeList(refresh: false)
   }
 }
