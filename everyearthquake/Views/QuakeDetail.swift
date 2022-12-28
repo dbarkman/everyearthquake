@@ -82,6 +82,7 @@ struct QuakeDetail: View {
       }
       .onAppear() {
         Mixpanel.mainInstance().track(event: "QuakeDetail View")
+        Review.detailViewed()
       }
       .navigationTitle("M\(quake.magnitude) - \(quake.location)")
     }

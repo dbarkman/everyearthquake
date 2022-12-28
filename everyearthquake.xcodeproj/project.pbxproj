@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		631C8C79295C8848005AEED0 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631C8C78295C8848005AEED0 /* Review.swift */; };
 		63DF40BA294C09BF00DC037E /* everyearthquakeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40B9294C09BF00DC037E /* everyearthquakeApp.swift */; };
 		63DF40BC294C09BF00DC037E /* QuakeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40BB294C09BF00DC037E /* QuakeList.swift */; };
 		63DF40BE294C09C000DC037E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63DF40BD294C09C000DC037E /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		631C8C78295C8848005AEED0 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		63DF40B6294C09BF00DC037E /* everyearthquake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = everyearthquake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DF40B9294C09BF00DC037E /* everyearthquakeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = everyearthquakeApp.swift; sourceTree = "<group>"; };
 		63DF40BB294C09BF00DC037E /* QuakeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuakeList.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				63DF40D2294C318A00DC037E /* APISettings.swift */,
+				631C8C78295C8848005AEED0 /* Review.swift */,
 				63DF40CB294C2DD100DC037E /* AsyncAPI.swift */,
 				63DF40DB294D810A00DC037E /* DateTime.swift */,
 				63DF40D4294C33F600DC037E /* Errors.swift */,
@@ -259,6 +262,7 @@
 				63DF40CC294C2DD100DC037E /* AsyncAPI.swift in Sources */,
 				63DF40F7295021D900DC037E /* LocationViewModel.swift in Sources */,
 				63DF40DC294D810A00DC037E /* DateTime.swift in Sources */,
+				631C8C79295C8848005AEED0 /* Review.swift in Sources */,
 				63DF40E8294F644F00DC037E /* Formatters.swift in Sources */,
 				63DF40C8294C24C100DC037E /* QuakeListViewModel.swift in Sources */,
 				63DF40E2294E2A7D00DC037E /* MapView.swift in Sources */,

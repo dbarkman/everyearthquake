@@ -71,6 +71,8 @@ class QuakeListViewModel: ObservableObject {
         DispatchQueue.main.async {
           if start == 0 {
             self.quakes.removeAll()
+          } else if start > 0 {
+            Review.secondPageViewed()
           }
           
           for var quake in response.quakes {

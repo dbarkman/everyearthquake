@@ -174,6 +174,7 @@ struct QuakeListFiltersModal: View {
       }
       .onAppear {
         Mixpanel.mainInstance().track(event: "QuakeListFilters View")
+        Review.filtersViewed()
         let filterEventsByLocation = UserDefaults.standard.bool(forKey: "filterEventsByLocation")
         self.filterEventsByLocation = filterEventsByLocation ? 1 : 0
         if filterEventsByLocation {

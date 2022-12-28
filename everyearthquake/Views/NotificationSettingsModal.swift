@@ -11,7 +11,7 @@ import OSLog
 
 struct NotificationSettingsModal: View {
   
-  let logger = Logger(subsystem: "com.dbarkman.everyearthquake", category: "QuakeList")
+  let logger = Logger(subsystem: "com.dbarkman.everyearthquake", category: "NotificationSettingsModal")
   
   @Environment(\.presentationMode) var presentationMode
   
