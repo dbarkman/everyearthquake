@@ -19,13 +19,13 @@ class QuakeListViewModel: ObservableObject {
     NotificationCenter.default.addObserver(self, selector: #selector(overrideGetQuakes), name: .notificationReceivedEvent, object: nil)
   }
 
-  @Published public var start = 0
-  @Published public var count = 100
-  @Published public var fetching = false
-  @Published public var quakes: [Day] = []
-  @Published public var magnitude: String = "All Magnitudes"
-  @Published public var type: String = "All Types"
-  @Published public var filterEventsByLocation = false
+  @Published var start = 0
+  @Published var count = 100
+  @Published var fetching = false
+  @Published var quakes: [Day] = []
+  @Published var magnitude: String = "All Magnitudes"
+  @Published var type: String = "All Types"
+  @Published var filterEventsByLocation = false
 
   private var location = ""
   private var radius = ""

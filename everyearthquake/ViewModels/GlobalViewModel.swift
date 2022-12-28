@@ -7,11 +7,8 @@
 
 import Foundation
 import Mixpanel
-import OSLog
 
 class GlobalViewModel: ObservableObject {
-  
-  let logger = Logger(subsystem: "com.dbarkman.everyearthquake", category: "GlobalViewModel")
   
   static let shared = GlobalViewModel()
   

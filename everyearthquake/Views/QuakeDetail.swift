@@ -10,8 +10,6 @@ import Mixpanel
 
 struct QuakeDetail: View {
   
-  @StateObject private var quakeListViewModel = QuakeListViewModel.shared
-  
   @State private var showFeedback = false
   
   var quake: Quake

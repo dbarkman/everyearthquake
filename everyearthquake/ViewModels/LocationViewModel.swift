@@ -8,11 +8,8 @@
 import Foundation
 import CoreLocation
 import Mixpanel
-import OSLog
 
 class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-  
-  let logger = Logger(subsystem: "com.dbarkman.everyearthquake", category: "LocationViewModel")
   
   static let shared = LocationViewModel()
   

@@ -18,9 +18,6 @@ struct QuakeListFiltersModal: View {
   var magnitudes = ["All Magnitudes", "Magnitude 1 and greater", "Magnitude 2 and greater", "Magnitude 3 and greater", "Magnitude 4 and greater", "Magnitude 5 and greater", "Magnitude 6 and greater", "Magnitude 7 and greater", "Magnitude 8 and greater", "Magnitude 9 and greater"]
   var types = ["All Types", "Earthquake", "Ice Quake", "Explosion", "Accidental Explosion", "Chemical Explosion", "Experimental Explosion", "Industrial Explosion", "Mining Explosion", "Nuclear Explosion", "Collapse", "Building Collapse", "Mine Collapse", "Quarry Blast", "Volcanic Eruption", "Landslide", "Rock Slide", "Rock Burst", "Sonic Boom", "Acoustic Noise", "Meteorite", "Train Crash", "Induced or Triggered Event", "Not Reported", "Other Event"]
   
-  @State private var selectedMagnitude = "All Magnitudes"
-  @State private var selectedType = "All Types"
-  
   @State private var filterEventsByLocation = 0
   @State private var automaticLocation = 0
   @State private var units = 0

@@ -6,12 +6,9 @@
 //
 
 import StoreKit
-import OSLog
 
 class Review {
   
-  let logger = Logger(subsystem: "com.dbarkman.everyearthquake", category: "Review")
-
   private let ud = UserDefaults.standard
   
   let minLaunches = 8

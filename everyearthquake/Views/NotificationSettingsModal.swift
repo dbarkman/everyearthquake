@@ -11,8 +11,6 @@ import OSLog
 
 struct NotificationSettingsModal: View {
   
-  let logger = Logger(subsystem: "com.dbarkman.everyearthquake", category: "NotificationSettingsModal")
-  
   @Environment(\.presentationMode) var presentationMode
   
   @StateObject private var locationViewModel = LocationViewModel.shared
@@ -27,7 +25,7 @@ struct NotificationSettingsModal: View {
   @State private var updateLocationResult = ""
   @State private var notificationsAllowed = false
 
-  @State public var magnitude: String
+  @State var magnitude: String
 
   @FocusState private var isFocused: Bool
 

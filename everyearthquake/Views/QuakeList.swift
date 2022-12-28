@@ -19,12 +19,11 @@ struct QuakeList: View {
   
   @State private var showFilters = false
   @State private var showFeedback = false
-  @State private var showNotificationAlert = true
   @State private var showNotificationSettings = false
 
   @State var refreshLocation: Bool = false
   
-  public var refresh: Bool
+  var refresh: Bool
   
   var body: some View {
     NavigationStack {
