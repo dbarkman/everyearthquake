@@ -19,19 +19,16 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
   @Published var lastSeenLocation: CLLocation? {
     didSet {
       guard oldValue != lastSeenLocation else { return }
-      logger.debug("LocationManager lastSeenLocation updated")
     }
   }
   @Published var currentPlacemark: CLPlacemark? {
     didSet {
       guard oldValue != currentPlacemark else { return }
-      logger.debug("LocationManager currentPlacemark updated")
     }
   }
   @Published var authorizationStatus: CLAuthorizationStatus {
     didSet {
       guard oldValue != authorizationStatus else { return }
-      logger.debug("LocationManager authorizationStatus updated")
       if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse {
         UserDefaults.standard.set(true, forKey: "automaticLocationFilter")
       } else {

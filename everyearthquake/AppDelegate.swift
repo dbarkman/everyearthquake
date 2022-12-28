@@ -30,7 +30,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
           application.registerForRemoteNotifications()
         }
       } else {
-        print("User denied notifications")
         if !UserDefaults.standard.bool(forKey: "notNewInstall") {
           UserDefaults.standard.set(true, forKey: "notNewInstall")
           UserDefaults.standard.set(false, forKey: "sendPush")
@@ -48,7 +47,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
           UserDefaults.standard.set(true, forKey: "sendPush")
         }
         let token = deviceToken.reduce("") { $0 + String(format: "%02x", $1) }
-        self.logger.debug("APNs token: \(token)")
         UserDefaults.standard.set(token, forKey: "apnsToken")
         
         var debug = 0

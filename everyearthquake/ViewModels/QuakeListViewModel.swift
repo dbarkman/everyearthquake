@@ -103,7 +103,6 @@ class QuakeListViewModel: ObservableObject {
   }
   
   private func getQuakesYet() -> Bool {
-    logger.debug("Trying to fetch forecasts.")
     let now = Date()
     var nextUpdate: Date
     if let quakesNextUpdate = UserDefaults.standard.object(forKey: "quakesNextUpdate") as? Date {
@@ -112,13 +111,10 @@ class QuakeListViewModel: ObservableObject {
       nextUpdate = Date(timeIntervalSince1970: 0)
     }
     if now > nextUpdate {
-      logger.debug("Fetching quakes.")
       nextUpdate = Calendar.current.date(byAdding: .minute, value: 1, to: Date()) ?? Date()
       UserDefaults.standard.set(nextUpdate, forKey: "quakesNextUpdate")
-      logger.debug("Next quake update is available! 🎉")
       return true
     } else {
-      logger.debug("Next quake update available at \(nextUpdate)")
       return true
 //      return false //turning off for now
     }

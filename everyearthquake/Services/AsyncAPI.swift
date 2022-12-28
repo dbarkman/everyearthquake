@@ -50,7 +50,6 @@ struct AsyncAPI {
       let units = UserDefaults.standard.string(forKey: "unitsSelectedNotifications") ?? "miles"
       httpBody += "&location=1&latitude=\(latitude)&longitude=\(longitude)&radius=\(radius)&units=\(units)"
     }
-    
     logger.debug("httpBody: \(httpBody)")
 
     var request = URLRequest(url: url)
