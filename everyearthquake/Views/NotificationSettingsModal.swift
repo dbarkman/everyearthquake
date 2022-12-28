@@ -48,7 +48,6 @@ struct NotificationSettingsModal: View {
               }
             }
             Toggle(isOn: $sendPushForLocation) {
-//              Text("Send Notifications for\rEarthquakes near me?")
               Text("Also limit notifications for\revents in a specific area?")
             }
             if sendPushForLocation {
@@ -248,7 +247,6 @@ struct NotificationSettingsModal: View {
       await AsyncAPI.shared.saveToken(token: token, debug: debug)
     }
     presentationMode.wrappedValue.dismiss()
-    //API call to update APNs token
   }
 }
 
