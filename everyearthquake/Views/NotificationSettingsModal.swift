@@ -29,7 +29,7 @@ struct NotificationSettingsModal: View {
 
   @FocusState private var isFocused: Bool
 
-  var magnitudes = ["All Magnitudes", "Magnitude 1 and greater", "Magnitude 2 and greater", "Magnitude 3 and greater", "Magnitude 4 and greater", "Magnitude 5 and greater", "Magnitude 6 and greater", "Magnitude 7 and greater", "Magnitude 8 and greater", "Magnitude 9 and greater", "No Magnitudes"]
+  var magnitudes = ["All Magnitudes\rabout 350 per day", "M 1 and greater\rabout 250 per day", "M 2 and greater\rabout 100 per day", "M 3 and greater\rabout 50 per day", "M 4 and greater\rabout 35 per day", "M 5 and greater\rabout 5 per day", "M 6 and greater\rabout 4 per week", "M 7 and greater\rabout 2 per month", "M 8 and greater\rabout 1-2 per year", "M 9 and greater\rrare, 1 in every 1 million"]
   
   var body: some View {
     NavigationStack {

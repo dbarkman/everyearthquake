@@ -48,6 +48,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
           Mixpanel.mainInstance().track(event: "Notifications Authorized")
           UserDefaults.standard.set(true, forKey: "notNewInstall")
           UserDefaults.standard.set(true, forKey: "sendPush")
+          UserDefaults.standard.set("M 5 and greater\rabout 5 per day", forKey: "notificationMagnitude")
         }
         let token = deviceToken.reduce("") { $0 + String(format: "%02x", $1) }
         UserDefaults.standard.set(token, forKey: "apnsToken")
