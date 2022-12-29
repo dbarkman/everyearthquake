@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import MapKit
 import Mixpanel
 
 struct QuakeDetail: View {
+  
+  @StateObject private var globalViewModel = GlobalViewModel.shared
   
   @State private var showFeedback = false
   
@@ -23,9 +26,10 @@ struct QuakeDetail: View {
         Text(DateTime.shared.makeStringFromDate(date: quake.date, dateFormat: .full, timeFormat: .medium))
           .listRowSeparator(.hidden)
 
-        MapView(type: quake.type, latitude: Double(quake.latitude) ?? 0, longitude: Double(quake.longitude) ?? 0, width: geometry.size.width * 0.9)
+//        MapView(type: quake.type, latitude: Double(quake.latitude) ?? 0, longitude: Double(quake.longitude) ?? 0, width: geometry.size.width * 0.9)
+        MapView(region: $globalViewModel.region, width: geometry.size.width * 0.9, places: globalViewModel.places)
           .listRowSeparator(.hidden)
-        
+
         Section(header: Text("Location Details")) {
           if !quake.continent.isEmpty { Text("Continent: \(quake.continent)") }
           if !quake.country.isEmpty { Text("Country: \(quake.country)") }
@@ -41,7 +45,7 @@ struct QuakeDetail: View {
                 .padding(.leading, -5)
             }
           }
-        
+
         }
 
         Section(header: Text("\(quake.type.capitalized) Details")) {
@@ -81,6 +85,7 @@ struct QuakeDetail: View {
       .onAppear() {
         Mixpanel.mainInstance().track(event: "QuakeDetail View")
         Review.detailViewed()
+        globalViewModel.setRegion(type: quake.type, latitude: Double(quake.latitude) ?? 0, longitude: Double(quake.longitude) ?? 0)
       }
       .navigationTitle("M\(quake.magnitude) - \(quake.location)")
     }

@@ -10,37 +10,36 @@ import MapKit
 
 struct MapView: View {
   
-  @State private var region: MKCoordinateRegion
+  @Binding var region: MKCoordinateRegion
+
+  var width: CGFloat = 400
+  var places: [PointOfInterest] = []
   
-  private var width: CGFloat = 400
-  private var places: [PointOfInterest] = []
-  
-  init(type: String, latitude: Double, longitude: Double, width: CGFloat) {
-    region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 2, longitudeDelta: 2))
-    self.width = width
-    
-    let poi = PointOfInterest(name: type, latitude: latitude, longitude: longitude)
-    places.append(poi)
-  }
+//  init(type: String, latitude: Double, longitude: Double, width: CGFloat) {
+//    region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 2, longitudeDelta: 2))
+//    self.width = width
+//
+//    let poi = PointOfInterest(name: type, latitude: latitude, longitude: longitude)
+//    places.append(poi)
+//  }
   
   var body: some View {
-    VStack {
-      Map(coordinateRegion: $region, interactionModes: [], annotationItems: places) { place in
-        MapAnnotation(coordinate: place.coordinate) {
-          Image(systemName: "waveform.path.ecg")
-            .resizable()
-            .foregroundColor(Color.red)
-            .scaledToFit()
-            .frame(width: 25, height: 25)
-        }
-      }
-      .frame(width: width, height: width)
+    Map(coordinateRegion: $region, interactionModes: [], annotationItems: places) { place in
+      MapMarker(coordinate: place.coordinate)
+//      MapAnnotation(coordinate: place.coordinate) {
+//        Image(systemName: "waveform.path.ecg")
+//          .resizable()
+//          .foregroundColor(Color.red)
+//          .scaledToFit()
+//          .frame(width: 25, height: 25)
+//      }
     }
+    .frame(width: width, height: width)
   }
 }
 
-struct MapView_Previews: PreviewProvider {
-  static var previews: some View {
-    MapView(type: "Earthquake", latitude: 51.507222, longitude: -0.1275, width: 400)
-  }
-}
+//struct MapView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    MapView(type: "Earthquake", latitude: 51.507222, longitude: -0.1275, width: 400)
+//  }
+//}
