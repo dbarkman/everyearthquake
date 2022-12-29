@@ -71,7 +71,7 @@ struct QuakeList: View {
             .padding(.bottom, 100)
         }
       }// end of ZStack
-      .overlay(quakeListViewModel.quakes.isEmpty && !quakeListViewModel.fetching ? Text("     no events to show\rtry changning the filters") : nil, alignment: .center)
+      .overlay(quakeListViewModel.quakes.isEmpty && !quakeListViewModel.fetching ? Text("     no events to show\r    or search timed out\rtry changning the filters") : nil, alignment: .center)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button(action: {

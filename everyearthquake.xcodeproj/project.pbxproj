@@ -39,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		631C8C78295C8848005AEED0 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		631C8C7A295D0E72005AEED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		63DF40B6294C09BF00DC037E /* everyearthquake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = everyearthquake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DF40B9294C09BF00DC037E /* everyearthquakeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = everyearthquakeApp.swift; sourceTree = "<group>"; };
 		63DF40BB294C09BF00DC037E /* QuakeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuakeList.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		63DF40B8294C09BF00DC037E /* everyearthquake */ = {
 			isa = PBXGroup;
 			children = (
+				631C8C7A295D0E72005AEED0 /* Info.plist */,
 				63DF414C29526F4E00DC037E /* everyearthquake.entitlements */,
 				63DF40B9294C09BF00DC037E /* everyearthquakeApp.swift */,
 				63DF414D2952708D00DC037E /* AppDelegate.swift */,
@@ -413,11 +415,11 @@
 				DEVELOPMENT_TEAM = V66UJ72Z63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = everyearthquake/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Earthquakes;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location needed in order to search for earthquakes based on your lcoation.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location needed in order to search for earthquakes based on your lcoation.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -450,11 +452,11 @@
 				DEVELOPMENT_TEAM = V66UJ72Z63;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = everyearthquake/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Earthquakes;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location needed in order to search for earthquakes based on your lcoation.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Location needed in order to search for earthquakes based on your lcoation.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";

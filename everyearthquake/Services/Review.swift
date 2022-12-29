@@ -11,9 +11,9 @@ class Review {
   
   private let ud = UserDefaults.standard
   
-  let minLaunches = 8
-  let minDays = 0
-  let daysBetweenReviews = 0
+  let minLaunches = 3
+  let minDays = 2
+  let daysBetweenReviews = 90
   
   var viewedDetail: Bool {
     get { ud.bool(forKey: "viewedDetail") }

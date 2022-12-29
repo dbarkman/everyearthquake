@@ -18,6 +18,7 @@ struct everyearthquakeApp: App {
     if !UserDefaults.standard.bool(forKey: "notNewInstall") {
       UserDefaults.standard.set(false, forKey: "sendPush")
     }
+    UserDefaults.standard.set(false, forKey: "filterEventsByLocation")
   }
 
   var body: some Scene {

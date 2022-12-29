@@ -33,7 +33,7 @@ struct QuakeListFiltersModal: View {
   var body: some View {
     NavigationStack {
       List {
-        Section(header: Text("Event Details"), footer: Text("Over 4.2 million events available")) {
+        Section(header: Text("Event Details"), footer: Text("Over 4.3 million events available")) {
           if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || filterEventsByLocation != 0 {
             Button(action: {
               quakeListViewModel.magnitude = "All Magnitudes"
