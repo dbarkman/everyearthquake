@@ -34,8 +34,8 @@ struct AsyncAPI {
     
     var httpBody = "token=\(token)&debug=\(debug)"
     let sendPush = UserDefaults.standard.bool(forKey: "sendPush") == true ? 1 : 0
-    let magnitude = UserDefaults.standard.string(forKey: "notificationMagnitude") ?? "Magnitude 5 and greater"
-    let notificationMagnitude = QuakeListViewModel.shared.magDict[magnitude] ?? "5"
+    let magnitude = UserDefaults.standard.string(forKey: "notificationMagnitude") ?? "M 5 and greater\rabout 5 per day"
+    let notificationMagnitude = QuakeListViewModel.shared.notificationsMagDict[magnitude] ?? "5"
     httpBody += "&sendPush=\(sendPush)&magnitude=\(notificationMagnitude)"
     
     if UserDefaults.standard.bool(forKey: "sendPushForLocation") {

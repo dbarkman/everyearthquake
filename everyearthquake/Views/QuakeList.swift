@@ -104,7 +104,7 @@ struct QuakeList: View {
         }
       }
       .sheet(isPresented: $showNotificationSettings) {
-        NotificationSettingsModal(magnitude: UserDefaults.standard.string(forKey: "notificationMagnitude") ?? "Magnitude 5 and greater")
+        NotificationSettingsModal(magnitude: UserDefaults.standard.string(forKey: "notificationMagnitude") ?? "M 5 and greater\rabout 5 per day")
       }
       .sheet(isPresented: $showFilters) {
         QuakeListFiltersModal(refreshLocation: $refreshLocation)
