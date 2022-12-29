@@ -7,6 +7,7 @@
 
 import UIKit
 import UserNotifications
+import Mixpanel
 import OSLog
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -31,6 +32,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
       } else {
         if !UserDefaults.standard.bool(forKey: "notNewInstall") {
+          Mixpanel.mainInstance().track(event: "Notifications Not Authorized")
           UserDefaults.standard.set(true, forKey: "notNewInstall")
           UserDefaults.standard.set(false, forKey: "sendPush")
         }
@@ -43,6 +45,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
       guard settings.authorizationStatus == .authorized else { return }
       if settings.alertSetting == .enabled {
         if !UserDefaults.standard.bool(forKey: "notNewInstall") {
+          Mixpanel.mainInstance().track(event: "Notifications Authorized")
           UserDefaults.standard.set(true, forKey: "notNewInstall")
           UserDefaults.standard.set(true, forKey: "sendPush")
         }

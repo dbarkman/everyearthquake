@@ -27,6 +27,7 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     didSet {
       guard oldValue != authorizationStatus else { return }
       if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse {
+        Mixpanel.mainInstance().track(event: "Location Authorized")
         UserDefaults.standard.set(true, forKey: "automaticLocationFilter")
       } else {
         Mixpanel.mainInstance().track(event: "Location Not Authorized")

@@ -207,7 +207,6 @@ struct NotificationSettingsModal: View {
       UserDefaults.standard.set(true, forKey: "sendPush")
       UserDefaults.standard.set(magnitude, forKey: "notificationMagnitude")
       if sendPushForLocation == true {
-        Mixpanel.mainInstance().track(event: "Sending Notifications by Location")
         UserDefaults.standard.set(true, forKey: "sendPushForLocation")
         if automaticLocation == 0 {
           if locationViewModel.authorizationStatus != .authorizedWhenInUse && locationViewModel.authorizationStatus != .authorizedAlways {

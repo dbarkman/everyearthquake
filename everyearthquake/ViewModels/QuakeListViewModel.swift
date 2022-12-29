@@ -48,11 +48,9 @@ class QuakeListViewModel: ObservableObject {
       let selectedType = self.type == "All Types" ? "" : self.type
       
       if selectedMagnitude != "0" {
-        Mixpanel.mainInstance().track(event: "Filtering Events by Magnitude", properties: ["magnitude": selectedMagnitude])
+        Mixpanel.mainInstance().track(event: "Filtering Events by Magnitude \(selectedMagnitude)")
       }
-      if type != "All Types" {
-        Mixpanel.mainInstance().track(event: "Filtering Events by Type", properties: ["type": type])
-      }
+      Mixpanel.mainInstance().track(event: "Filtering Events by \(type)")
       
       if UserDefaults.standard.bool(forKey: "filterEventsByLocation") {
         DispatchQueue.main.async {
@@ -73,6 +71,7 @@ class QuakeListViewModel: ObservableObject {
             self.quakes.removeAll()
           } else if start > 0 {
             Review.secondPageViewed()
+            Mixpanel.mainInstance().track(event: "Page \(start / 100) Viewed")
           }
           
           for var quake in response.quakes {

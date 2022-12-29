@@ -6,6 +6,7 @@
 //
 
 import StoreKit
+import Mixpanel
 
 class Review {
   
@@ -85,6 +86,7 @@ class Review {
     launches += 1
     if viewedDetail && viewedFilters && viewedSecondPage && launches >= minLaunches && daysInstalled >= minDays {
       if lastReviewDate == nil || daysSinceLastReview >= daysBetweenReviews {
+        Mixpanel.mainInstance().track(event: "Review Requested for \(version)")
         lastReviewDate = Date()
         lastRequestVersion = version
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

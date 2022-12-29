@@ -192,15 +192,16 @@ struct QuakeListFiltersModal: View {
   
   private func updateLocation() {
     if filterEventsByLocation == 1 {
-      Mixpanel.mainInstance().track(event: "Filtering Events by Location")
       UserDefaults.standard.set(true, forKey: "filterEventsByLocation")
       if automaticLocation == 0 {
+        Mixpanel.mainInstance().track(event: "Filtering Events by Automatic Location")
         if locationViewModel.authorizationStatus != .authorizedWhenInUse && locationViewModel.authorizationStatus != .authorizedAlways {
           updateLocationResult = "Location permission must be granted in order to use automatic location."
           return
         }
         UserDefaults.standard.set(true, forKey: "automaticLocationFilter")
       } else {
+        Mixpanel.mainInstance().track(event: "Filtering Events by Manual Location")
         UserDefaults.standard.set(false, forKey: "automaticLocationFilter")
         if latitude.isEmpty || longitude.isEmpty {
           updateLocationResult = "Both latitude and longitude must be entered."
