@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Mixpanel
 import OSLog
 
 struct AsyncAPI {
@@ -49,6 +50,16 @@ struct AsyncAPI {
       let radius = UserDefaults.standard.string(forKey: "radiusSelectedNotifications") ?? "500"
       let units = UserDefaults.standard.string(forKey: "unitsSelectedNotifications") ?? "miles"
       httpBody += "&location=1&latitude=\(latitude)&longitude=\(longitude)&radius=\(radius)&units=\(units)"
+    }
+    
+    if let distinctId = UserDefaults.standard.string(forKey: "distinctId") {
+      httpBody += "&uuid=\(distinctId)"
+    } else {
+      let distinctId = UUID().uuidString
+      UserDefaults.standard.set(distinctId, forKey: "distinctId")
+      httpBody += "&uuid=\(distinctId)"
+      Mixpanel.mainInstance().identify(distinctId: distinctId)
+      Mixpanel.mainInstance().people.set(properties: ["$name":distinctId])
     }
     logger.debug("httpBody: \(httpBody)")
 

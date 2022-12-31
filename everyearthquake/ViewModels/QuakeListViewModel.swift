@@ -73,7 +73,7 @@ class QuakeListViewModel: ObservableObject {
             self.quakes.removeAll()
           } else if start > 0 {
             Review.secondPageViewed()
-            Mixpanel.mainInstance().track(event: "Page \(start / 100) Viewed")
+            Mixpanel.mainInstance().track(event: "Page \(start / 100 + 1) Viewed")
           }
           
           for var quake in response.quakes {
