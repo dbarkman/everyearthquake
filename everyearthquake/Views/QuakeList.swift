@@ -21,8 +21,6 @@ struct QuakeList: View {
   @State private var showFeedback = false
   @State private var showNotificationSettings = false
 
-  @State var refreshLocation: Bool = false
-  
   var refresh: Bool
   
   var body: some View {
@@ -33,20 +31,7 @@ struct QuakeList: View {
             Section(header: Text(section.title)) {
               ForEach(section.quakes) { quake in
                 NavigationLink(value: quake) {
-                  HStack {
-                    ZStack {
-                      RoundedRectangle(cornerRadius: 75, style: .continuous)
-                        .fill(quake.color)
-                        .frame(width: 50, height: 50)
-                      Text(quake.magnitude)
-                        .foregroundColor(Color.black)
-                    }
-                    Text(quake.formattedTitle ?? "")
-                      .lineLimit(2)
-                    Spacer()
-                    Text(DateTime.shared.makeStringFromDate(date: quake.date, dateFormat: .none, timeFormat: .short))
-                      .font(.caption)
-                  }
+                  QuakeListRow(quake: quake)
                 }
               }
             }
@@ -107,7 +92,7 @@ struct QuakeList: View {
         NotificationSettingsModal(magnitude: UserDefaults.standard.string(forKey: "notificationMagnitude") ?? "M 5 and greater\rabout 5 per day")
       }
       .sheet(isPresented: $showFilters) {
-        QuakeListFiltersModal(refreshLocation: $refreshLocation)
+        QuakeListFiltersModal()
       }
       .sheet(isPresented: $showFeedback) {
         FeedbackModal()
