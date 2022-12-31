@@ -130,9 +130,11 @@ struct QuakeList: View {
           Task {
             await quakeListViewModel.getQuakes(start: 0, count: quakeListViewModel.count)
           }
+          Mixpanel.mainInstance().track(event: "EE Session Start")
         } else if newPhase == .inactive {
           logger.debug("inactive")
         } else if newPhase == .background {
+          Mixpanel.mainInstance().track(event: "EE Session End")
           logger.debug("background")
         }
       }
