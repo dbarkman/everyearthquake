@@ -26,8 +26,6 @@ struct QuakeListFiltersModal: View {
   @State private var radius = ""
   @State private var updateLocationResult = ""
   
-  @Binding var refreshLocation: Bool
-
   @FocusState private var isFocused: Bool
 
   var body: some View {
@@ -228,10 +226,9 @@ struct QuakeListFiltersModal: View {
 }
 
 struct QuakeListFiltersModal_Previews: PreviewProvider {
-  @State static var refreshLocation: Bool = false
   static var previews: some View {
     NavigationStack {
-      QuakeListFiltersModal(refreshLocation: $refreshLocation)
+      QuakeListFiltersModal()
     }
   }
 }
