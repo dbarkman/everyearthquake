@@ -70,7 +70,7 @@ struct QuakeList: View {
           Button(action: {
             showFilters = true
           }, label: {
-            if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || quakeListViewModel.filterEventsByLocation {
+            if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || quakeListViewModel.filterEventsByLocation || quakeListViewModel.filterEventsByDate {
               Image(systemName: "line.3.horizontal.decrease.circle.fill")
                 .symbolRenderingMode(.monochrome)
             } else {

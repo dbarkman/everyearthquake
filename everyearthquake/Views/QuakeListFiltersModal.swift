@@ -18,12 +18,8 @@ struct QuakeListFiltersModal: View {
   var magnitudes = ["All Magnitudes", "Magnitude 1 and greater", "Magnitude 2 and greater", "Magnitude 3 and greater", "Magnitude 4 and greater", "Magnitude 5 and greater", "Magnitude 6 and greater", "Magnitude 7 and greater", "Magnitude 8 and greater", "Magnitude 9 and greater"]
   var types = ["All Types", "Earthquake", "Ice Quake", "Explosion", "Accidental Explosion", "Chemical Explosion", "Experimental Explosion", "Industrial Explosion", "Mining Explosion", "Nuclear Explosion", "Collapse", "Building Collapse", "Mine Collapse", "Quarry Blast", "Volcanic Eruption", "Landslide", "Rock Slide", "Rock Burst", "Sonic Boom", "Acoustic Noise", "Meteorite", "Train Crash", "Induced or Triggered Event", "Not Reported", "Other Event"]
   
-  @State private var filterEventsByLocation = 0
-  @State private var automaticLocation = 0
-  @State private var units = 0
   @State private var latitude = ""
   @State private var longitude = ""
-  @State private var radius = ""
   @State private var updateLocationResult = ""
   
   @FocusState private var isFocused: Bool
@@ -32,12 +28,12 @@ struct QuakeListFiltersModal: View {
     NavigationStack {
       List {
         Section(header: Text("Event Details"), footer: Text("Over 4.3 million events available")) {
-          if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || filterEventsByLocation != 0 {
+          if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || quakeListViewModel.filterEventsByLocation || quakeListViewModel.filterEventsByDate {
             Button(action: {
               quakeListViewModel.magnitude = "All Magnitudes"
               quakeListViewModel.type = "All Types"
               quakeListViewModel.filterEventsByLocation = false
-              filterEventsByLocation = 0
+              quakeListViewModel.filterEventsByDate = false
               updateLocation()
             }) {
               Text("Reset Filters")
@@ -55,21 +51,27 @@ struct QuakeListFiltersModal: View {
             }
           }
         }
-        Section(header: Text("Event Location")) {
-          Text("Filter events based on location?")
-          Picker("", selection: $filterEventsByLocation) {
-            Text("No").tag(0)
-            Text("Yes").tag(1)
+        Section(header: Text("Event Date"), footer: Text("Dates are midnight to midnight, UTC timezone")) {
+          Toggle(isOn: $quakeListViewModel.filterEventsByDate) {
+            Text("Filter events by date")
           }
-          .pickerStyle(.segmented)
-          if filterEventsByLocation == 1 {
+          if quakeListViewModel.filterEventsByDate {
+            DatePicker("Start Date:", selection: $quakeListViewModel.startDate, displayedComponents: .date)
+            DatePicker("End Date:", selection: $quakeListViewModel.endDate, displayedComponents: .date)
+          }
+        }
+        Section(header: Text("Event Location")) {
+          Toggle(isOn: $quakeListViewModel.filterEventsByLocation) {
+            Text("Filter events based on location?")
+          }
+          if quakeListViewModel.filterEventsByLocation {
             Text("How should location be determined?")
-            Picker("", selection: $automaticLocation) {
-              Text("My Location").tag(0)
-              Text("Manually").tag(1)
+            Picker("", selection: $quakeListViewModel.automaticLocation) {
+              Text("My Location").tag(true)
+              Text("Manually").tag(false)
             }
             .pickerStyle(.segmented)
-            if automaticLocation == 0 {
+            if quakeListViewModel.automaticLocation {
               if locationViewModel.authorizationStatus == .notDetermined {
                 Button(action: {
                   withAnimation() {
@@ -92,7 +94,7 @@ struct QuakeListFiltersModal: View {
                   Text("Open Settings")
                 })
               }
-            } else if automaticLocation == 1 {
+            } else if !quakeListViewModel.automaticLocation {
               HStack {
                 Text("Latitude:")
                 TextField("latitude", text: $latitude)
@@ -114,13 +116,13 @@ struct QuakeListFiltersModal: View {
             }
             
             Text("Filter range in miles or kilometers:")
-            Picker("", selection: $units) {
-              Text("Miles").tag(0)
-              Text("Kilometers").tag(1)
+            Picker("", selection: $quakeListViewModel.units) {
+              Text("Miles").tag("miles")
+              Text("Kilometers").tag("kilometers")
             }
             .pickerStyle(.segmented)
-            Text("How many \(units == 0 ? "miles" : "kilometers") from location centerpoint?")
-            TextField("\(units == 0 ? "miles" : "kilometers")", text: $radius)
+            Text("How many \(quakeListViewModel.units) from location centerpoint?")
+            TextField("\(quakeListViewModel.units)", text: $quakeListViewModel.radius)
               .textFieldStyle(RoundedBorderTextFieldStyle())
               .keyboardType(.numberPad)
               .focused($isFocused)
@@ -170,13 +172,7 @@ struct QuakeListFiltersModal: View {
       .onAppear {
         Mixpanel.mainInstance().track(event: "QuakeListFilters View")
         Review.filtersViewed()
-        let filterEventsByLocation = UserDefaults.standard.bool(forKey: "filterEventsByLocation")
-        self.filterEventsByLocation = filterEventsByLocation ? 1 : 0
-        if filterEventsByLocation {
-          let automaticLocation = UserDefaults.standard.bool(forKey: "automaticLocationFilter")
-          self.automaticLocation = automaticLocation ? 0 : 1
-          radius = UserDefaults.standard.string(forKey: "radiusSelectedFilter") ?? "25"
-          units = UserDefaults.standard.integer(forKey: "unitsSelectedFilter")
+        if quakeListViewModel.filterEventsByLocation && !quakeListViewModel.automaticLocation {
           guard let manualLocationData = UserDefaults.standard.string(forKey: "manualLocationDataFilter") else { return }
           if let latitude = manualLocationData.components(separatedBy: ",").first, let longitude = manualLocationData.components(separatedBy: ",").last {
             self.latitude = latitude
@@ -189,9 +185,8 @@ struct QuakeListFiltersModal: View {
   }
   
   private func updateLocation() {
-    if filterEventsByLocation == 1 {
-      UserDefaults.standard.set(true, forKey: "filterEventsByLocation")
-      if automaticLocation == 0 {
+    if quakeListViewModel.filterEventsByLocation {
+      if quakeListViewModel.automaticLocation {
         Mixpanel.mainInstance().track(event: "Filtering Events by Automatic Location")
         if locationViewModel.authorizationStatus != .authorizedWhenInUse && locationViewModel.authorizationStatus != .authorizedAlways {
           updateLocationResult = "Location permission must be granted in order to use automatic location."
@@ -207,14 +202,10 @@ struct QuakeListFiltersModal: View {
         }
         UserDefaults.standard.set("\(latitude),\(longitude)", forKey: "manualLocationDataFilter")
       }
-      if radius.isEmpty {
+      if quakeListViewModel.radius.isEmpty {
         updateLocationResult = "Please enter a search radius."
         return
       }
-      UserDefaults.standard.set(radius, forKey: "radiusSelectedFilter")
-      UserDefaults.standard.set(units, forKey: "unitsSelectedFilter")
-    } else {
-      UserDefaults.standard.set(false, forKey: "filterEventsByLocation")
     }
     Task {
       quakeListViewModel.quakes.removeAll()

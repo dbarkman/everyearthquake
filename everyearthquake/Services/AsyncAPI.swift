@@ -19,12 +19,14 @@ struct AsyncAPI {
   var urlBase: String
   var tokenEndpoint: String
   var earthquakesEndpoint: String
-  
+  var earthquakesByDateEndpoint: String
+
   private init() {
     apiKey = APISettings.shared.fetchAPISettings().apiKey
     urlBase = APISettings.shared.fetchAPISettings().urlBase
     tokenEndpoint = APISettings.shared.fetchAPISettings().tokenEndpoint
     earthquakesEndpoint = APISettings.shared.fetchAPISettings().earthquakesEndpoint
+    earthquakesByDateEndpoint = APISettings.shared.fetchAPISettings().earthquakesByDateEndpoint
   }
   
   func saveToken(token: String, debug: Int) async {
@@ -80,22 +82,35 @@ struct AsyncAPI {
     return
   }
   
-  func getQuakes(start: Int, count: Int, magnitude: String, type: String, location: String, radius: String, units: String) async -> EarthquakesResponse? {
+  func getQuakes(start: Int, count: Int, magnitude: String, type: String, startDate: String, endDate: String, location: String, radius: String, units: String) async -> EarthquakesResponse? {
     var decodedResponse: EarthquakesResponse?
     
     var urlString = urlBase + earthquakesEndpoint
+    if !startDate.isEmpty && !endDate.isEmpty {
+      urlString = urlBase + earthquakesByDateEndpoint
+    }
+    
     urlString += "?start=\(start)"
     urlString += "&count=\(count)"
     urlString += "&magnitude=\(magnitude)"
     if !type.isEmpty { urlString += "&type=\(type)" }
+    
+    if !startDate.isEmpty && !endDate.isEmpty {
+      urlString += "&startDate=\(startDate)&endDate=\(endDate)"
+    }
+    
     if !location.isEmpty {
       urlString += location
       urlString += "&radius=\(radius)"
       urlString += "&units=\(units)"
     }
     urlString += "&key=" + apiKey
+    urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? urlString
     logger.debug("URL: \(urlString)")
-    guard let url = URL(string: urlString) else { return nil }
+    guard let url = URL(string: urlString) else {
+      logger.error("Failed to build URL. 😭")
+      return nil
+    }
     var request = URLRequest(url: url)
     request.httpMethod = "GET"
     
@@ -125,6 +140,7 @@ struct AsyncAPI {
           return decodedResponse
         }
       } else {
+        logger.error("Failed to parse http response when fetching earthquakes. 😭")
         return nil
       }
     } catch {

@@ -16,6 +16,7 @@ class QuakeListViewModel: ObservableObject {
   static let shared = QuakeListViewModel()
   
   private init() {
+    self.startDate = Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date()
     NotificationCenter.default.addObserver(self, selector: #selector(overrideGetQuakes), name: .notificationReceivedEvent, object: nil)
   }
 
@@ -25,11 +26,15 @@ class QuakeListViewModel: ObservableObject {
   @Published var quakes: [Day] = []
   @Published var magnitude: String = "All Magnitudes"
   @Published var type: String = "All Types"
+  @Published var filterEventsByDate = false
+  @Published var startDate: Date
+  @Published var endDate = Date()
   @Published var filterEventsByLocation = false
-
+  @Published var automaticLocation = true
+  @Published var radius = ""
+  @Published var units = "miles"
+  
   private var location = ""
-  private var radius = ""
-  private var units = ""
 
   let magDict: [String:String] = ["All Magnitudes":"0", "Magnitude 1 and greater":"1", "Magnitude 2 and greater":"2", "Magnitude 3 and greater":"3", "Magnitude 4 and greater":"4", "Magnitude 5 and greater":"5", "Magnitude 6 and greater":"6", "Magnitude 7 and greater":"7", "Magnitude 8 and greater":"8", "Magnitude 9 and greater":"9"]
 
@@ -54,19 +59,24 @@ class QuakeListViewModel: ObservableObject {
       }
       Mixpanel.mainInstance().track(event: "Filtering Events by \(type)")
       
-      if UserDefaults.standard.bool(forKey: "filterEventsByLocation") {
-        DispatchQueue.main.async {
-          self.filterEventsByLocation = true
-        }
+      var startDateString = ""
+      var endDateString = ""
+      if filterEventsByDate {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        startDateString = dateFormatter.string(from: startDate)
+        endDateString = dateFormatter.string(from: endDate)
+        Mixpanel.mainInstance().track(event: "Filtering Events by date", properties: ["startDate": startDateString, "endDate": endDateString])
+      }
+      
+      if filterEventsByLocation {
         location = await Location.getLocation()
-        radius = UserDefaults.standard.string(forKey: "radiusSelectedFilter") ?? "1000"
-        units = UserDefaults.standard.integer(forKey: "unitsSelectedFilter") == 0 ? "miles" : "kilometers"
         Mixpanel.mainInstance().track(event: "Filtering Events distance by \(units)", properties: ["radius": radius])
       } else {
         location = ""
       }
       
-      if let response = await AsyncAPI.shared.getQuakes(start: start, count: count, magnitude: selectedMagnitude, type: selectedType, location: location, radius: radius, units: units) {
+      if let response = await AsyncAPI.shared.getQuakes(start: start, count: count, magnitude: selectedMagnitude, type: selectedType, startDate: startDateString, endDate: endDateString, location: location, radius: radius, units: units) {
         
         DispatchQueue.main.async {
           if start == 0 {
