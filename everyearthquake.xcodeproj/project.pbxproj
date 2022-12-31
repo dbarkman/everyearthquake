@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		631C8C79295C8848005AEED0 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631C8C78295C8848005AEED0 /* Review.swift */; };
 		6379786E295DE44F0026E240 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6379786D295DE44F0026E240 /* LaunchScreen.storyboard */; };
+		6379788A295FC8580026E240 /* CardQuakeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63797889295FC8580026E240 /* CardQuakeList.swift */; };
+		6379788C295FC8C70026E240 /* CardQuakeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379788B295FC8C70026E240 /* CardQuakeListViewModel.swift */; };
 		6379788E295FCCB40026E240 /* QuakeListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379788D295FCCB40026E240 /* QuakeListRow.swift */; };
 		63DF40BA294C09BF00DC037E /* everyearthquakeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40B9294C09BF00DC037E /* everyearthquakeApp.swift */; };
 		63DF40BC294C09BF00DC037E /* QuakeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DF40BB294C09BF00DC037E /* QuakeList.swift */; };
@@ -43,6 +45,8 @@
 		631C8C78295C8848005AEED0 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		631C8C7A295D0E72005AEED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6379786D295DE44F0026E240 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		63797889295FC8580026E240 /* CardQuakeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardQuakeList.swift; sourceTree = "<group>"; };
+		6379788B295FC8C70026E240 /* CardQuakeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardQuakeListViewModel.swift; sourceTree = "<group>"; };
 		6379788D295FCCB40026E240 /* QuakeListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuakeListRow.swift; sourceTree = "<group>"; };
 		63DF40B6294C09BF00DC037E /* everyearthquake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = everyearthquake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63DF40B9294C09BF00DC037E /* everyearthquakeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = everyearthquakeApp.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 				63DF40EE294F760A00DC037E /* GlobalViewModel.swift */,
 				63DF40F6295021D900DC037E /* LocationViewModel.swift */,
 				63DF40C7294C24C100DC037E /* QuakeListViewModel.swift */,
+				6379788B295FC8C70026E240 /* CardQuakeListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 		63DF40F3294FBE8300DC037E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				63797889295FC8580026E240 /* CardQuakeList.swift */,
 				63DF40EC294F75AC00DC037E /* FeedbackModal.swift */,
 				63DF40E1294E2A7D00DC037E /* MapView.swift */,
 				63DF414A295261FC00DC037E /* NotificationSettingsModal.swift */,
@@ -271,6 +277,7 @@
 				63DF40CC294C2DD100DC037E /* AsyncAPI.swift in Sources */,
 				63DF40F7295021D900DC037E /* LocationViewModel.swift in Sources */,
 				6379788E295FCCB40026E240 /* QuakeListRow.swift in Sources */,
+				6379788C295FC8C70026E240 /* CardQuakeListViewModel.swift in Sources */,
 				63DF40DC294D810A00DC037E /* DateTime.swift in Sources */,
 				631C8C79295C8848005AEED0 /* Review.swift in Sources */,
 				63DF40E8294F644F00DC037E /* Formatters.swift in Sources */,
@@ -279,6 +286,7 @@
 				63DF40F92950221300DC037E /* Messaging.swift in Sources */,
 				63DF40DE294D8E7D00DC037E /* Day.swift in Sources */,
 				63DF40D1294C2FE500DC037E /* APIInfo.swift in Sources */,
+				6379788A295FC8580026E240 /* CardQuakeList.swift in Sources */,
 				63DF40E4294E342E00DC037E /* PointOfInterest.swift in Sources */,
 				63DF40FD29502EEC00DC037E /* Location.swift in Sources */,
 				63DF40D5294C33F600DC037E /* Errors.swift in Sources */,
