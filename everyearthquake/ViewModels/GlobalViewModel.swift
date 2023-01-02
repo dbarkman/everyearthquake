@@ -27,4 +27,18 @@ class GlobalViewModel: ObservableObject {
     }
     return buildNum
   }
+  
+  func fetchOsVersion() -> String {
+    let os = ProcessInfo.processInfo.operatingSystemVersion
+    let osVersion = String(os.majorVersion) + "." + String(os.minorVersion) + "." + String(os.patchVersion)
+    return osVersion
+  }
+  
+  func fetchDevice() -> String {
+    if let simulatorModelIdentifier = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] { return simulatorModelIdentifier }
+    var sysinfo = utsname()
+    uname(&sysinfo) // ignore return value
+    return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
+  }
+  
 }
