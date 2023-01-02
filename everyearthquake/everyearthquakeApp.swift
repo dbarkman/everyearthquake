@@ -18,6 +18,17 @@ struct everyearthquakeApp: App {
     if !UserDefaults.standard.bool(forKey: "notNewInstall") {
       UserDefaults.standard.set(false, forKey: "sendPush")
     }
+    upgradeSteps()
+  }
+  
+  private func upgradeSteps() {
+    let appVersion = GlobalViewModel.shared.fetchAppVersionNumber()
+    let buildNumber = GlobalViewModel.shared.fetchBuildNumber()
+    let currentVersion = "\(appVersion)-\(buildNumber)"
+    if currentVersion != UserDefaults.standard.string(forKey: "currentVersion") {
+      UserDefaults.standard.set(currentVersion, forKey: "currentVersion")
+      UserDefaults.standard.set(true, forKey: "showNotificationsAlert")
+    }
   }
 
   var body: some Scene {
