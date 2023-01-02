@@ -39,7 +39,7 @@ class QuakeListViewModel: ObservableObject {
 
   let magDict: [String:String] = ["All Magnitudes":"0", "Magnitude 1 and greater":"1", "Magnitude 2 and greater":"2", "Magnitude 3 and greater":"3", "Magnitude 4 and greater":"4", "Magnitude 5 and greater":"5", "Magnitude 6 and greater":"6", "Magnitude 7 and greater":"7", "Magnitude 8 and greater":"8", "Magnitude 9 and greater":"9"]
   let notificationsMagDict: [String:String] = ["All Magnitudes\rabout 350 per day":"0", "M 1 and greater\rabout 250 per day":"1", "M 2 and greater\rabout 100 per day":"2", "M 3 and greater\rabout 50 per day":"3", "M 4 and greater\rabout 35 per day":"4", "M 5 and greater\rabout 5 per day":"5", "M 6 and greater\rabout 4 per week":"6", "M 7 and greater\rabout 2 per month":"7", "M 8 and greater\rabout 1-2 per year":"8", "M 9 and greater\rrare, 1 in every 1 million":"9"]
-  let sortByDict = ["Date":"time", "Significance":"sig", "Felt It Reports":"felt", "Felt Intensity":"cdi DESC,felt", "Measured Intensity":"mmi"]
+  let sortByDict = ["Date":"time", "Magnitude":"magnitude", "Significance":"sig", "Felt It Reports":"felt", "Felt Intensity":"cdi DESC,felt", "Measured Intensity":"mmi"]
 
   @objc private func overrideGetQuakes() {
     Task {
@@ -101,6 +101,8 @@ class QuakeListViewModel: ObservableObject {
             
             var sectionHeader: String
             switch orderBy {
+              case "magnitude":
+                sectionHeader = quake.magnitude
               case "sig":
                 sectionHeader = Formatters.shared.formatNumber(quake.sig)
               case "felt":

@@ -23,8 +23,14 @@ struct QuakeListRow: View {
       Text(quake.formattedTitle ?? "")
         .lineLimit(2)
       Spacer()
-      Text(DateTime.shared.makeStringFromDate(date: quake.date, dateFormat: .none, timeFormat: .short))
-        .font(.caption)
+      VStack {
+        if QuakeListViewModel.shared.sortBy != "Date" {
+          Text(DateTime.shared.makeStringFromDate(date: quake.date, dateFormat: .medium, timeFormat: .none))
+            .font(.caption)
+        }
+        Text(DateTime.shared.makeStringFromDate(date: quake.date, dateFormat: .none, timeFormat: .short))
+          .font(.caption)
+      }
     }
   }
 }
