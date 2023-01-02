@@ -102,15 +102,15 @@ class QuakeListViewModel: ObservableObject {
             var sectionHeader: String
             switch orderBy {
               case "magnitude":
-                sectionHeader = quake.magnitude
+                sectionHeader = "Magnitude " + quake.magnitude
               case "sig":
-                sectionHeader = Formatters.shared.formatNumber(quake.sig)
+                sectionHeader = "Significance: " + Formatters.shared.formatNumber(quake.sig)
               case "felt":
-                sectionHeader = Formatters.shared.formatNumber(quake.felt)
+                sectionHeader = "Felt It Reports: " + Formatters.shared.formatNumber(quake.felt)
               case "cdi DESC,felt":
-                sectionHeader = Formatters.shared.convertToRoman(number: quake.cdi)
+                sectionHeader = "Felt It Intensity: " + Formatters.shared.convertToRoman(number: quake.cdi)
               case "mmi":
-                sectionHeader = Formatters.shared.convertToRoman(number: quake.mmi)
+                sectionHeader = "Measured Intensity: " + Formatters.shared.convertToRoman(number: quake.mmi)
               default:
                 sectionHeader = DateTime.shared.makeStringFromDate(date: quake.date, dateFormat: .full, timeFormat: .none)
             }
