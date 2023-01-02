@@ -20,6 +20,7 @@ struct QuakeList: View {
   @State private var showFilters = false
   @State private var showFeedback = false
   @State private var showNotificationSettings = false
+  @State private var showNotificationsAlert = false
 
   var refresh: Bool
   
@@ -70,7 +71,7 @@ struct QuakeList: View {
           Button(action: {
             showFilters = true
           }, label: {
-            if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || quakeListViewModel.filterEventsByLocation || quakeListViewModel.filterEventsByDate {
+            if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || quakeListViewModel.filterEventsByLocation || quakeListViewModel.filterEventsByDate || quakeListViewModel.sortBy != "Date" {
               Image(systemName: "line.3.horizontal.decrease.circle.fill")
                 .symbolRenderingMode(.monochrome)
             } else {
@@ -97,6 +98,11 @@ struct QuakeList: View {
       .sheet(isPresented: $showFeedback) {
         FeedbackModal()
       }
+      .alert(Text("Notifications"), isPresented: $showNotificationsAlert, actions: {
+        Button("OK") { }
+      }, message: {
+        Text("By default, notifications are set to deliver for magnitude 5 events and greater. On average these occur about 5 times per day. You can change notification settings by tapping the \"hamburger\" button in the top left.")
+      })
       .refreshable {
         quakeListViewModel.start = 0
         await quakeListViewModel.getQuakes(start: quakeListViewModel.start, count: quakeListViewModel.count)
@@ -107,6 +113,10 @@ struct QuakeList: View {
           Task {
             await quakeListViewModel.getQuakes(start: 0, count: quakeListViewModel.count)
           }
+        }
+        if UserDefaults.standard.bool(forKey: "showNotificationsAlert") {
+          UserDefaults.standard.set(false, forKey: "showNotificationsAlert")
+          showNotificationsAlert = true
         }
       }
       .onChange(of: scenePhase) { newPhase in

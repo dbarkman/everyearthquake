@@ -11,7 +11,11 @@ import Mixpanel
 struct QuakeDetail: View {
   
   @State private var showFeedback = false
-  
+  @State private var showSignifcanceAlert = false
+  @State private var showFeltItAlert = false
+  @State private var showCDIAlert = false
+  @State private var showMMIAlert = false
+
   var quake: Quake
   
   var body: some View {
@@ -45,6 +49,61 @@ struct QuakeDetail: View {
         }
 
         Section(header: Text("\(quake.type.capitalized) Details")) {
+          HStack {
+            Text("Alert level:")
+            ZStack {
+              RoundedRectangle(cornerRadius: 15, style: .continuous)
+                .fill(quake.alertColor)
+                .frame(width: 100, height: 35)
+              Text(quake.alert.isEmpty ? "N/A" : quake.alert)
+                .foregroundColor(Color.black)
+                .textCase(.uppercase)
+            }
+            Link(destination: URL(string: "https://earthquake.usgs.gov/data/pager")!) {
+              Image(systemName: "questionmark.circle")
+            }
+            .foregroundColor(.blue)
+          }
+          HStack {
+            Text("Significance:")
+            Text(Formatters.shared.formatNumber(quake.sig))
+            Button {
+              showSignifcanceAlert = true
+            } label: {
+              Image(systemName: "questionmark.circle")
+                .foregroundColor(.blue)
+            }
+          }
+          HStack {
+            Text("Felt It Reports:")
+            Text(Formatters.shared.formatNumber(quake.felt))
+            Button {
+              showFeltItAlert = true
+            } label: {
+              Image(systemName: "questionmark.circle")
+                .foregroundColor(.blue)
+            }
+          }
+          HStack {
+            Text("Felt Intensity:")
+            Text(Formatters.shared.convertToRoman(number: quake.cdi))
+            Button {
+              showCDIAlert = true
+            } label: {
+              Image(systemName: "questionmark.circle")
+                .foregroundColor(.blue)
+            }
+          }
+          HStack {
+            Text("Measured Intensity:")
+            Text(Formatters.shared.convertToRoman(number: quake.mmi))
+            Button {
+              showMMIAlert = true
+            } label: {
+              Image(systemName: "questionmark.circle")
+                .foregroundColor(.blue)
+            }
+          }
           Text("Depth: \(Formatters.shared.format(distance: Double(quake.depth) ?? 0, from: .kilometers))")
           if quake.tsunami == "0" {
             Text("Tsunami: No")
@@ -55,6 +114,13 @@ struct QuakeDetail: View {
                 .foregroundColor(.blue)
                 .padding(.leading, -5)
             }
+          }
+          HStack {
+            Text("Status:")
+            Text(quake.status.capitalized)
+            Text(quake.status == "automatic" ? "(not reviewed by a human)" : "(reviewed by a human)")
+              .font(.caption)
+            
           }
         }
 
@@ -78,6 +144,31 @@ struct QuakeDetail: View {
       .sheet(isPresented: $showFeedback) {
         FeedbackModal()
       }
+      .alert(Text("Significance"), isPresented: $showSignifcanceAlert, actions: {
+        Button("OK") { }
+      }, message: {
+        Text("A number describing how significant the event is, ranging from 0 to 2,910, the highest yet reported. This value is determined on a number of factors, including: magnitude, measured intensity, felt reports, and estimated impact.")
+      })
+      .alert(Text("Felt It"), isPresented: $showFeltItAlert, actions: {
+        Link("DYFI", destination: URL(string: "https://earthquake.usgs.gov/data/dyfi")!)
+        Button("OK") { }
+      }, message: {
+        Text("The total number of felt reports submitted to the DYFI system.")
+      })
+      .alert(Text("Felt Intensity"), isPresented: $showCDIAlert, actions: {
+        Link("DYFI", destination: URL(string: "https://earthquake.usgs.gov/data/dyfi")!)
+        Link("Magnitude vs. Intensity", destination: URL(string: "https://www.usgs.gov/natural-hazards/earthquake-hazards/science/earthquake-magnitude-energy-release-and-shaking-intensity")!)
+        Button("OK") { }
+      }, message: {
+        Text("The maximum reported intensity for the event. Computed by DYFI.")
+      })
+      .alert(Text("Measured Intensity"), isPresented: $showMMIAlert, actions: {
+        Link("ShakeMap", destination: URL(string: "https://earthquake.usgs.gov/data/shakemap")!)
+        Link("Magnitude vs. Intensity", destination: URL(string: "https://www.usgs.gov/natural-hazards/earthquake-hazards/science/earthquake-magnitude-energy-release-and-shaking-intensity")!)
+        Button("OK") { }
+      }, message: {
+        Text("The maximum estimated instrumental intensity for the event. Computed by ShakeMap.")
+      })
       .onAppear() {
         Mixpanel.mainInstance().track(event: "QuakeDetail View for \(quake.id)")
         Review.detailViewed()
@@ -90,7 +181,7 @@ struct QuakeDetail: View {
 
 struct QuakeDetail_Previews: PreviewProvider {
   static let date = DateTime.shared.makeDateFromString(date: "2022-12-14T13:32:49", format: "yyyy-MM-dd'T'HH:mm:ss")
-  static let quake = Quake(id: "ok2022yqrm", magnitude: "2.56", type: "earthquake", title: "M 2.6 - 7 km N of Quinlan, Oklahoma", date: date, time: "1671292301492", url: "https://earthquake.usgs.gov/earthquakes/eventpage/ok2022yqrm", tsunami: "0", depth: "5", latitude: "36.5216", longitude: "-99.0586", place: "7 km N of Quinlan, Oklahoma", distanceKM: "7", placeOnly: "N of Quinlan, Oklahoma", location: "Quinlan, Oklahoma", continent: "North America", country: "United States of America", subnational: "Oklahoma", city: "", locality: "Woodward County", postcode: "73852", what3words: "ironclad.letters.refrigerator", timezone: "-360")
+  static let quake = Quake(id: "ok2022yqrm", magnitude: "2.56", type: "earthquake", title: "M 2.6 - 7 km N of Quinlan, Oklahoma", date: date, time: "1671292301492", url: "https://earthquake.usgs.gov/earthquakes/eventpage/ok2022yqrm", tsunami: "1", alert: "red", cdi: "7", felt: "525", mmi: "8", sig: "356", status: "reviewed", depth: "5", latitude: "36.5216", longitude: "-99.0586", place: "7 km N of Quinlan, Oklahoma", distanceKM: "7", placeOnly: "N of Quinlan, Oklahoma", location: "Quinlan, Oklahoma", continent: "North America", country: "United States of America", subnational: "Oklahoma", city: "", locality: "Woodward County", postcode: "73852", what3words: "ironclad.letters.refrigerator", timezone: "-360")
   static var previews: some View {
     NavigationStack {
       QuakeDetail(quake: quake)

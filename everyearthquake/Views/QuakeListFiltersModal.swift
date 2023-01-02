@@ -17,6 +17,7 @@ struct QuakeListFiltersModal: View {
   
   var magnitudes = ["All Magnitudes", "Magnitude 1 and greater", "Magnitude 2 and greater", "Magnitude 3 and greater", "Magnitude 4 and greater", "Magnitude 5 and greater", "Magnitude 6 and greater", "Magnitude 7 and greater", "Magnitude 8 and greater", "Magnitude 9 and greater"]
   var types = ["All Types", "Earthquake", "Ice Quake", "Explosion", "Accidental Explosion", "Chemical Explosion", "Experimental Explosion", "Industrial Explosion", "Mining Explosion", "Nuclear Explosion", "Collapse", "Building Collapse", "Mine Collapse", "Quarry Blast", "Volcanic Eruption", "Landslide", "Rock Slide", "Rock Burst", "Sonic Boom", "Acoustic Noise", "Meteorite", "Train Crash", "Induced or Triggered Event", "Not Reported", "Other Event"]
+  var sortBy = ["Date", "Magnitude", "Significance", "Felt It Reports", "Felt Intensity", "Measured Intensity"]
   
   @State private var latitude = ""
   @State private var longitude = ""
@@ -28,12 +29,13 @@ struct QuakeListFiltersModal: View {
     NavigationStack {
       List {
         Section(header: Text("Event Details"), footer: Text("Over 4.3 million events available")) {
-          if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || quakeListViewModel.filterEventsByLocation || quakeListViewModel.filterEventsByDate {
+          if quakeListViewModel.magnitude != "All Magnitudes" || quakeListViewModel.type != "All Types" || quakeListViewModel.filterEventsByLocation || quakeListViewModel.filterEventsByDate || quakeListViewModel.sortBy != "Date" {
             Button(action: {
               quakeListViewModel.magnitude = "All Magnitudes"
               quakeListViewModel.type = "All Types"
               quakeListViewModel.filterEventsByLocation = false
               quakeListViewModel.filterEventsByDate = false
+              quakeListViewModel.sortBy = "Date"
               updateLocation()
             }) {
               Text("Reset Filters")
@@ -47,6 +49,11 @@ struct QuakeListFiltersModal: View {
           }
           Picker("Event type", selection: $quakeListViewModel.type) {
             ForEach(types, id: \.self) {
+              Text($0)
+            }
+          }
+          Picker("Sort by", selection: $quakeListViewModel.sortBy) {
+            ForEach(sortBy, id: \.self) {
               Text($0)
             }
           }

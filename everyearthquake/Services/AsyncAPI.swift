@@ -33,6 +33,8 @@ struct AsyncAPI {
     
     var urlString = urlBase + tokenEndpoint
     urlString += "?key=" + apiKey
+    urlString += addVersionInfo(urlString: urlString)
+    logger.debug("URL: \(urlString)")
     guard let url = URL(string: urlString) else { return }
     
     var httpBody = "token=\(token)&debug=\(debug)"
@@ -82,7 +84,7 @@ struct AsyncAPI {
     return
   }
   
-  func getQuakes(start: Int, count: Int, magnitude: String, type: String, startDate: String, endDate: String, location: String, radius: String, units: String) async -> EarthquakesResponse? {
+  func getQuakes(start: Int, count: Int, magnitude: String, type: String, startDate: String, endDate: String, location: String, radius: String, units: String, orderBy: String) async -> EarthquakesResponse? {
     var decodedResponse: EarthquakesResponse?
     
     var urlString = urlBase + earthquakesEndpoint
@@ -104,7 +106,9 @@ struct AsyncAPI {
       urlString += "&radius=\(radius)"
       urlString += "&units=\(units)"
     }
+    urlString += "&orderBy=\(orderBy)"
     urlString += "&key=" + apiKey
+    urlString += addVersionInfo(urlString: urlString)
     urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? urlString
     logger.debug("URL: \(urlString)")
     guard let url = URL(string: urlString) else {
@@ -148,4 +152,13 @@ struct AsyncAPI {
     }
     return decodedResponse
   }
+  
+  func addVersionInfo(urlString: String) -> String {
+    let appVersion = GlobalViewModel.shared.fetchAppVersionNumber()
+    let buildNumber = GlobalViewModel.shared.fetchBuildNumber()
+    let osVersion = GlobalViewModel.shared.fetchOsVersion()
+    let device = GlobalViewModel.shared.fetchDevice()
+    return "&appVersion=\(appVersion).\(buildNumber)&osVersion=\(osVersion)&device=\(device)"
+  }
+  
 }
